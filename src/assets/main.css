@@ -1,0 +1,111 @@
+:root{
+    --clr-primary-400: #F0C62D;
+    --clr-secondary-100: #494B5A;
+
+    --clr-accent-200: #08F7FE;
+    --clr-accent-400: #09FBD3;
+    --clr-accent-800: #FE53BB;
+
+    --clr-neutral-100: #F8F4F4;
+    --clr-neutral-500: #75B3BD;
+
+    --clr-dark-800: #140000;
+
+    --ff-primary: 'Roboto', sans-serif;
+    --ff-accent: 'My Soul', cursive;
+}
+
+*,
+*::before,
+*::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--ff-primary);
+    font-weight: 400;
+    font-size: 1.3125rem;
+    line-height: 1.6;
+    background: var(--clr-primary-400);
+}
+
+body,
+h1,
+h2, 
+h3,
+p {
+    margin: 0
+}
+
+
+input{
+    background:var(--clr-primary-400);
+    border:  var(--clr-dark-800) 1px solid;
+    min-height: 2rem;
+    border-radius: 0.5rem;
+}
+
+input:focus-visible{
+    box-shadow: 0 0 1.5rem var(--clr-accent-800);
+}
+
+input:focus{
+    box-shadow: 0 0 1.5rem var(--clr-accent-800);
+}
+
+.input-field{
+    min-width: 90%;
+}
+
+.button{
+    min-width: 90%;
+    cursor: pointer;
+}
+
+/* helper classes */
+.container{
+    margin: 0 10%;
+    height: 100vh;
+    background: var(--clr-secondary-100);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.section{
+    padding: 2rem 2rem;
+}
+
+.section * > p{
+    color: var(--clr-accent-200)
+}
+
+.section > h1 {
+    color: var(--clr-accent-800);
+}
+
+
+.section + .section {
+    margin-top: 8rem;
+}
+
+@media(min-width: 64rem){
+    
+    input + input{
+        margin-left: 0.5rem;
+    }
+    
+    .input-field {
+        min-width: 30%;
+    }
+    
+    .button{
+        min-width: 10%;
+    }
+
+    .section + .section {
+        margin-top: 16rem;
+    }
+}
