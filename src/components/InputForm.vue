@@ -25,11 +25,6 @@ import ErrorMsg from "./ErrorMsg.vue";
 export default {
   components: { ErrorMsg },
   name: "InputForm",
-  props: {
-    jsonString: {
-      type: String,
-    },
-  },
   data: () => {
     return {
       jsonInput: "",
