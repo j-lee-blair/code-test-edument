@@ -46,7 +46,7 @@ export default {
         this.invalidJson = true;
       } finally {
         if (this.invalidJson === false) {
-          this.$emit("inputValid", this.jsonInput);
+          this.$emit("childCallback", this.jsonInput, this.$options.name);
         }
       }
     },

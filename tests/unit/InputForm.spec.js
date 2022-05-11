@@ -10,7 +10,7 @@ test("when JSON string invalid, show error msg", async () => {
 
   const errorMsg = wrapper.find(selectors.error);
   expect(errorMsg.exists()).toBeTruthy();
-  expect(wrapper.emitted().inputValid).toBeFalsy();
+  expect(wrapper.emitted().childCallback).toBeFalsy();
 });
 
 test("when JSON string is valid, do not show error msg", async () => {
@@ -31,8 +31,8 @@ test("when JSON string is valid and click ok, should emit inputValid event", asy
 
   await setInputAndClickOk(wrapper, inputField, validJson);
 
-  expect(wrapper.emitted().inputValid).toBeTruthy();
-  expect(wrapper.emitted().inputValid[0]).toEqual([validJson]);
+  expect(wrapper.emitted().childCallback).toBeTruthy();
+  expect(wrapper.emitted().childCallback[0][0]).toEqual(validJson);
 });
 
 async function setInputAndClickOk(wrapper, element, value) {
