@@ -33,7 +33,6 @@ export default {
   },
   methods: {
     handleCallback(data = {}, componentName = "") {
-      console.log("data: ", data, "\nname: ", componentName);
       switch (componentName) {
         case "InputForm":
           this.jsonData = data;
