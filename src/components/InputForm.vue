@@ -13,7 +13,7 @@
         type="button"
         class="button text-center"
         value="OK"
-        @click="JsonIsInvalid"
+        @click="validateJsonString"
       />
     </div>
     <ErrorMsg t-id="InputForm-json-error" :show="invalidJson" />
@@ -33,7 +33,7 @@ export default {
   },
 
   methods: {
-    JsonIsInvalid() {
+    validateJsonString() {
       try {
         JSON.parse(this.jsonInput);
         this.invalidJson = false;
