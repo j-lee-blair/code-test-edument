@@ -1,11 +1,11 @@
 <template>
-  <div id="app" class="container text-center">
-    <div class="section">
-      <h1>JSON Tree Viewer</h1>
-    </div>
-    <div class="section">
-      <input-form />
-    </div>
+  <div id="app" class="container">
+    <section>
+      <header class="text-center">JSON Tree Viewer</header>
+    </section>
+    <section>
+      <input-form class="text-center" />
+    </section>
   </div>
 </template>
 
