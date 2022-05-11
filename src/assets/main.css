@@ -5,6 +5,9 @@
     --clr-accent-200: #08F7FE;
     --clr-accent-400: #09FBD3;
     --clr-accent-800: #FE53BB;
+    
+    --clr-warning-800: #dd1313;
+    --clr-warning-300: #e75c5cf2;
 
     --clr-neutral-100: #F8F4F4;
     --clr-neutral-500: #75B3BD;
@@ -38,6 +41,12 @@ p {
     margin: 0
 }
 
+/* padding for spacing */
+header,
+section {
+    padding: 3rem 0;
+}
+
 
 input{
     background:var(--clr-primary-400);
@@ -50,7 +59,7 @@ input:focus-visible{
     box-shadow: 0 0 1.5rem var(--clr-accent-800);
 }
 
-input:focus{
+input:active{
     box-shadow: 0 0 1.5rem var(--clr-accent-800);
 }
 
@@ -65,47 +74,53 @@ input:focus{
 
 /* helper classes */
 .container{
-    margin: 0 10%;
+    margin-inline: auto;
+    width: min(90%, 70.5rem);
     height: 100vh;
     background: var(--clr-secondary-100);
+}
+
+.split{
+    display: flex;
+    justify-content: center;
 }
 
 .text-center {
     text-align: center;
 }
 
-.section{
+section{
     padding: 2rem 2rem;
 }
 
-.section * > p{
+section * > p{
     color: var(--clr-accent-200)
 }
 
-.section > h1 {
+section > header {
     color: var(--clr-accent-800);
 }
 
 
-.section + .section {
+section + section {
     margin-top: 8rem;
 }
 
-@media(min-width: 64rem){
+@media(min-width: 40rem){
     
     input + input{
         margin-left: 0.5rem;
     }
     
     .input-field {
-        min-width: 30%;
+        min-width: 15.5rem;
     }
     
     .button{
-        min-width: 10%;
+        min-width: 1rem;
     }
 
-    .section + .section {
+    section + section {
         margin-top: 16rem;
     }
 }
