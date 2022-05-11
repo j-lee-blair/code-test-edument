@@ -1,16 +1,52 @@
 <template>
   <div>
-    <p class="">Enter your JSON string to see File Tree</p>
-    <div class="split input-wrapper">
-      <input type="text" class="input-field" />
-      <input type="button" class="button text-center" value="button" />
+    <p>Enter your JSON string to see File Tree</p>
+    <div>
+      <input
+        t-id="InputForm-input-field"
+        type="text"
+        class="input-field"
+        v-model="jsonInput"
+      />
+      <input
+        t-id="InputForm-button"
+        type="button"
+        class="button text-center"
+        value="OK"
+        @click="JsonIsInvalid"
+      />
     </div>
+    <ErrorMsg t-id="InputForm-json-error" :show="invalidJson" />
   </div>
 </template>
 
 <script>
+import ErrorMsg from "./ErrorMsg.vue";
 export default {
+  components: { ErrorMsg },
   name: "InputForm",
+  props: {
+    jsonString: {
+      type: String,
+    },
+  },
+  data: () => {
+    return {
+      jsonInput: "",
+      invalidJson: false,
+    };
+  },
+
+  methods: {
+    JsonIsInvalid() {
+      try {
+        JSON.parse(this.jsonInput);
+        this.invalidJson = false;
+      } catch (e) {
+        this.invalidJson = true;
+      }
+    },
+  },
 };
 </script>
 
