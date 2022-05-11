@@ -44,6 +44,10 @@ export default {
         this.invalidJson = false;
       } catch (e) {
         this.invalidJson = true;
+      } finally {
+        if (this.invalidJson === false) {
+          this.$emit("inputValid", this.jsonInput);
+        }
       }
     },
   },

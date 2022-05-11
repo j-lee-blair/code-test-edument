@@ -10,6 +10,7 @@ test("when JSON string invalid, show error msg", async () => {
 
   const errorMsg = wrapper.find(selectors.error);
   expect(errorMsg.exists()).toBeTruthy();
+  expect(wrapper.emitted().inputValid).toBeFalsy();
 });
 
 test("when JSON string is valid, do not show error msg", async () => {
@@ -21,6 +22,17 @@ test("when JSON string is valid, do not show error msg", async () => {
 
   const errorMsg = wrapper.find(selectors.error);
   expect(errorMsg.exists()).toBe(false);
+});
+
+test("when JSON string is valid and click ok, should emit inputValid event", async () => {
+  const wrapper = mount(InputForm);
+  const validJson = '[{"valid": "json"}]';
+  const inputField = wrapper.find(selectors.inputField);
+
+  await setInputAndClickOk(wrapper, inputField, validJson);
+
+  expect(wrapper.emitted().inputValid).toBeTruthy();
+  expect(wrapper.emitted().inputValid[0]).toEqual([validJson]);
 });
 
 async function setInputAndClickOk(wrapper, element, value) {
