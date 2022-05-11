@@ -4,29 +4,37 @@ import { mount } from "@vue/test-utils";
 test("when JSON string invalid, show error msg", async () => {
   const wrapper = mount(InputForm);
   const invalidJSON = "invalid";
-  const inputField = wrapper.find('[t-id="InputForm-input-field"]');
+  const inputField = wrapper.find(selectors.inputField);
 
-  setInputField(inputField, invalidJSON);
-  const button = wrapper.find('[t-id="InputForm-button"]');
-  await button.trigger("click");
+  await setInputAndClickOk(wrapper, inputField, invalidJSON);
 
-  const errorMsg = wrapper.find('[t-id="InputForm-json-error"]');
+  const errorMsg = wrapper.find(selectors.error);
   expect(errorMsg.exists()).toBeTruthy();
 });
 
 test("when JSON string is valid, do not show error msg", async () => {
   const wrapper = mount(InputForm);
   const validJson = '[{"valid": "json"}]';
-  const inputField = wrapper.find('[t-id="InputForm-input-field"]');
+  const inputField = wrapper.find(selectors.inputField);
 
-  setInputField(inputField, validJson);
-  const button = wrapper.find('[t-id="InputForm-button"]');
-  await button.trigger("click");
+  await setInputAndClickOk(wrapper, inputField, validJson);
 
-  const errorMsg = wrapper.find('[t-id="InputForm-json-error"]');
+  const errorMsg = wrapper.find(selectors.error);
   expect(errorMsg.exists()).toBe(false);
 });
+
+async function setInputAndClickOk(wrapper, element, value) {
+  setInputField(element, value);
+  const button = wrapper.find(selectors.button);
+  button.trigger("click");
+}
 
 function setInputField(wrapper, val = "") {
   wrapper.setValue(val);
 }
+
+const selectors = {
+  inputField: '[t-id="InputForm-input-field"]',
+  error: '[t-id="InputForm-json-error"]',
+  button: '[t-id="InputForm-button"]',
+};
