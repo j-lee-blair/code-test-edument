@@ -1,30 +1,16 @@
 import App from "../../src/App";
 import { mount } from "@vue/test-utils";
+import { setInputAndClickOk, selectors } from "./helpers";
 
 test("when JSON string valid and click ok, should switch to tree view", async () => {
   const wrapper = mount(App);
   const validJson = '[{"valid": "json"}]';
-  const inputField = wrapper.find(selectors.InputForminputField);
+  const inputField = wrapper.find(selectors.InputFormInputField);
 
   await setInputAndClickOk(wrapper, inputField, validJson);
 
   const treeComp = wrapper.find(selectors.TreeComponent);
-
+  const inputForm = wrapper.find(selectors.InputForm);
   expect(treeComp.exists()).toBeTruthy();
+  expect(inputForm.exists()).toBeFalsy();
 });
-
-async function setInputAndClickOk(wrapper, element, value) {
-  setInputField(element, value);
-  const button = wrapper.find(selectors.InputFormbutton);
-  button.trigger("click");
-}
-
-function setInputField(wrapper, val = "") {
-  wrapper.setValue(val);
-}
-
-const selectors = {
-  InputForminputField: '[t-id="InputForm-input-field"]',
-  InputFormbutton: '[t-id="InputForm-button"]',
-  TreeComponent: '[t-id="TreeComponent"]',
-};

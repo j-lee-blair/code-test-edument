@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div t-id="InputForm">
     <p>Enter your JSON string to see File Tree</p>
     <div>
       <input
