@@ -1,6 +1,6 @@
 <template>
   <div t-id="TreeComponent">
-    <div v-for="folder in propsData.root.folders" :key="folder.name">
+    <div v-for="folder in propsData.folders" :key="folder.name">
       <Folder :folder="folder" />
     </div>
   </div>
