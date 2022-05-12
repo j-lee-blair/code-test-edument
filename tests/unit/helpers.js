@@ -1,11 +1,7 @@
 export async function setInputAndClickOk(wrapper, element, value) {
-  setInputField(element, value);
+  element.setValue(value);
   const button = wrapper.find(selectors.InputFormbutton);
   button.trigger("click");
-}
-
-function setInputField(wrapper, val = "") {
-  wrapper.setValue(val);
 }
 
 export const selectors = {
