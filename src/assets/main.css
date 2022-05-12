@@ -120,7 +120,7 @@ section + section {
         min-width: 1rem;
     }
 
-    section + section {
+    /* section + section {
         margin-top: 16rem;
-    }
+    } */
 }

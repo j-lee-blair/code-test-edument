@@ -8,7 +8,6 @@
         <component
           :is="activeView"
           @childCallback="handleCallback"
-          class="text-center"
           :propsData="jsonData"
         />
       </keep-alive>
@@ -19,6 +18,7 @@
 <script>
 import InputForm from "./components/InputForm.vue";
 import TreeComponent from "./components/TreeComponent.vue";
+import { generateTree } from "./dataUtilities";
 export default {
   name: "App",
   components: {
@@ -32,10 +32,10 @@ export default {
     };
   },
   methods: {
-    handleCallback(data = {}, componentName = "") {
+    handleCallback(data = [], componentName = "") {
       switch (componentName) {
         case "InputForm":
-          this.jsonData = data;
+          this.jsonData = generateTree(data);
           this.activeView = "TreeComponent";
           break;
         default:

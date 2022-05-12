@@ -1,16 +1,24 @@
 <template>
-  <div t-id="TreeComponent">{{ propsData }}</div>
+  <div t-id="TreeComponent">
+    <div v-for="folder in propsData.root.folders" :key="folder.name">
+      <Folder :folder="folder" />
+    </div>
+  </div>
 </template>
 
 <script>
+import Folder from "./Folder.vue";
 export default {
   props: {
     propsData: {
-      type: String,
-      required: false,
+      type: Object,
+      // required: true,
     },
   },
-  components: {},
+  mounted() {
+    // console.log("TreeComp: ", this.propsData);
+  },
+  components: { Folder },
 };
 </script>
 

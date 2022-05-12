@@ -1,5 +1,5 @@
 <template>
-  <div t-id="InputForm">
+  <div t-id="InputForm" class="text-center">
     <p>Enter your JSON string to see File Tree</p>
     <div>
       <input
@@ -16,7 +16,7 @@
         @click="validateJsonString"
       />
     </div>
-    <ErrorMsg t-id="InputForm-json-error" :show="invalidJson" />
+    <ErrorMsg t-id="InputForm-json-error" :show="jsonInvalid" />
   </div>
 </template>
 
@@ -28,20 +28,21 @@ export default {
   data: () => {
     return {
       jsonInput: "",
-      invalidJson: false,
+      jsonInvalid: false,
     };
   },
 
   methods: {
     validateJsonString() {
+      let jsonString;
       try {
-        JSON.parse(this.jsonInput);
-        this.invalidJson = false;
+        jsonString = JSON.parse(this.jsonInput);
+        this.jsonInvalid = !Array.isArray(jsonString) ? true : false;
       } catch (e) {
-        this.invalidJson = true;
+        this.jsonInvalid = true;
       } finally {
-        if (this.invalidJson === false) {
-          this.$emit("childCallback", this.jsonInput, this.$options.name);
+        if (!this.jsonInvalid) {
+          this.$emit("childCallback", jsonString, this.$options.name);
         }
       }
     },

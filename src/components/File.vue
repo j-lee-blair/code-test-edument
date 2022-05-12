@@ -1,0 +1,33 @@
+<template>
+  <div t-id="File-file-name" class="left-indent">
+    <i class="icon material-icons">insert_drive_file</i>
+    <p class="title">
+      {{ fileName }}
+    </p>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    fileName: {
+      type: String,
+    },
+  },
+};
+</script>
+
+<style scoped>
+.icon {
+  vertical-align: middle;
+  font-size: 1.8rem;
+}
+
+.title {
+  display: inline;
+}
+
+.left-indent {
+  margin-left: 2rem;
+}
+</style>
