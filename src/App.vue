@@ -8,7 +8,7 @@
         <component
           :is="activeView"
           @childCallback="handleCallback"
-          :propsData="jsonData"
+          :propsData="folders"
         />
       </keep-alive>
     </section>
@@ -18,7 +18,7 @@
 <script>
 import InputForm from "./components/InputForm.vue";
 import TreeComponent from "./components/TreeComponent.vue";
-import { generateTree } from "./dataUtilities";
+import { toFolderList } from "./dataUtilities";
 export default {
   name: "App",
   components: {
@@ -28,14 +28,14 @@ export default {
   data: function () {
     return {
       activeView: "InputForm",
-      jsonData: "",
+      folders: [],
     };
   },
   methods: {
     handleCallback(data = [], componentName = "") {
       switch (componentName) {
         case "InputForm":
-          this.jsonData = generateTree(data);
+          this.folders = toFolderList(data);
           this.activeView = "TreeComponent";
           break;
         default:

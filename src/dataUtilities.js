@@ -1,4 +1,4 @@
-export function generateTree(rawData) {
+export function toFolderList(rawData) {
   let filePathWithFile = rawData.flatMap((string) => string.split("/"));
   return filePathWithFile.reduce(toFolderStructure, {});
 }
