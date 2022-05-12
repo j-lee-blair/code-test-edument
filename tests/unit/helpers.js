@@ -14,7 +14,7 @@ export const selectors = {
   InputFormbutton: '[t-id="InputForm-button"]',
   InputFormError: '[t-id="InputForm-json-error"]',
   TreeComponent: '[t-id="TreeComponent"]',
-  TreeComponentFolder: '[t-id="TreeComponent-folder"]',
-  TreeComponentFolderTitle: '[t-id="TreeComponent-folder-title"]',
-  TreeComponentFileName: '[t-id="File-file-name"]',
+  FolderComponentFolder: '[t-id="Folder-folder"]',
+  FolderComponentFolderTitle: '[t-id="Folder-folder-title"]',
+  FileComponentFileName: '[t-id="File-file-name"]',
 };

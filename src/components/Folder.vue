@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div t-id="TreeComponent-folder" class="folder">
+    <div t-id="Folder-folder" class="folder">
       <i class="icon material-icons">folder</i>
-      <p t-id="TreeComponent-folder-title" class="title">{{ folder.name }}</p>
+      <p t-id="Folder-folder-title" class="title">{{ folder.name }}</p>
       <div v-for="file in folder.files" :key="file">
         <File :fileName="file" />
       </div>

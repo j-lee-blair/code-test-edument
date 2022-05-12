@@ -22,8 +22,8 @@ test("when input array has one item, should render folder with correct title", a
 
   await setInputAndClickOk(wrapper, inputField, stringArray);
 
-  const treeFolder = wrapper.find(selectors.TreeComponentFolder);
-  const treeFolderTitle = wrapper.find(selectors.TreeComponentFolderTitle);
+  const treeFolder = wrapper.find(selectors.FolderComponentFolder);
+  const treeFolderTitle = wrapper.find(selectors.FolderComponentFolderTitle);
   expect(treeFolder.exists()).toBeTruthy();
   expect(treeFolderTitle.html()).toContain("dc");
 });
@@ -36,9 +36,9 @@ test("when input array has two items, render tree structure with one folder and 
 
   await setInputAndClickOk(wrapper, inputField, stringArray);
 
-  const treeFolder = wrapper.find(selectors.TreeComponentFolder);
-  const treeFolderTitle = wrapper.find(selectors.TreeComponentFolderTitle);
-  const fileName = wrapper.find(selectors.TreeComponentFileName);
+  const treeFolder = wrapper.find(selectors.FolderComponentFolder);
+  const treeFolderTitle = wrapper.find(selectors.FolderComponentFolderTitle);
+  const fileName = wrapper.find(selectors.FileComponentFileName);
 
   expect(treeFolder.exists()).toBeTruthy();
   expect(treeFolderTitle.html()).toContain("dc");
