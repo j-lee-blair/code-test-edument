@@ -1,15 +1,15 @@
 import InputForm from "../../src/components/InputForm";
 import { mount } from "@vue/test-utils";
-import { setInputAndClickOk, selectors } from "./helpers";
+import { setInputAndClickOk, Selectors } from "./helpers";
 
 test("when input is not array, show error msg", async () => {
   const wrapper = mount(InputForm);
   const invalidInput = "invalid";
-  const inputField = wrapper.find(selectors.InputFormInputField);
+  const inputField = wrapper.find(Selectors.InputFormInputField);
 
   await setInputAndClickOk(wrapper, inputField, invalidInput);
 
-  const errorMsg = wrapper.find(selectors.InputFormError);
+  const errorMsg = wrapper.find(Selectors.InputFormError);
   expect(errorMsg.exists()).toBeTruthy();
   expect(wrapper.emitted().childCallback).toBeFalsy();
 });
@@ -17,18 +17,18 @@ test("when input is not array, show error msg", async () => {
 test("when array is valid, do not show error msg", async () => {
   const wrapper = mount(InputForm);
   const validInput = `["dc/character_list.txt"]`;
-  const inputField = wrapper.find(selectors.InputFormInputField);
+  const inputField = wrapper.find(Selectors.InputFormInputField);
 
   await setInputAndClickOk(wrapper, inputField, validInput);
 
-  const errorMsg = wrapper.find(selectors.InputFormError);
+  const errorMsg = wrapper.find(Selectors.InputFormError);
   expect(errorMsg.exists()).toBe(false);
 });
 
 test("when JSON string is valid and click ok, emit inputValid event with array data", async () => {
   const wrapper = mount(InputForm);
   const validInput = `["dc/character_list.txt"]`;
-  const inputField = wrapper.find(selectors.InputFormInputField);
+  const inputField = wrapper.find(Selectors.InputFormInputField);
 
   await setInputAndClickOk(wrapper, inputField, validInput);
 

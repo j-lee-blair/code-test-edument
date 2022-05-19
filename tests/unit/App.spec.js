@@ -1,13 +1,13 @@
 import App from "../../src/App";
 import { mount } from "@vue/test-utils";
-import { selectors, simulateClickWithValue, UserInput } from "./helpers";
+import { Selectors, simulateClickWithValue, UserInput } from "./helpers";
 
 test("when input and click ok, should switch to tree view", async () => {
   const wrapper = mount(App);
   await simulateClickWithValue(wrapper, UserInput.OneFolderOneFile);
 
-  const treeComp = wrapper.find(selectors.TreeComponent);
-  const inputForm = wrapper.find(selectors.InputForm);
+  const treeComp = wrapper.find(Selectors.TreeComponent);
+  const inputForm = wrapper.find(Selectors.InputForm);
   expect(treeComp.exists()).toBeTruthy();
   expect(inputForm.exists()).toBeFalsy();
 });
@@ -16,9 +16,9 @@ test("when input has one file only, render tree structure with one file no subfo
   const wrapper = mount(App);
   await simulateClickWithValue(wrapper, UserInput.OneFileOnly);
 
-  const treeFolders = wrapper.findAll(selectors.FolderComponentFolder);
-  const treeFolderTitle = wrapper.findAll(selectors.FolderComponentFolderTitle);
-  const fileName = wrapper.find(selectors.FileComponentFileName);
+  const treeFolders = wrapper.findAll(Selectors.FolderComponentFolder);
+  const treeFolderTitle = wrapper.findAll(Selectors.FolderComponentFolderTitle);
+  const fileName = wrapper.find(Selectors.FileComponentFileName);
 
   expect(treeFolders.length).toBe(1);
   expect(treeFolderTitle.at(0).html()).toContain("Root");
@@ -29,9 +29,9 @@ test("when input has one folder one file, render tree structure with one subfold
   const wrapper = mount(App);
   await simulateClickWithValue(wrapper, UserInput.OneFolderOneFile);
 
-  const treeFolder = wrapper.find(selectors.FolderComponentFolder);
-  const treeFolderTitle = wrapper.findAll(selectors.FolderComponentFolderTitle);
-  const fileName = wrapper.find(selectors.FileComponentFileName);
+  const treeFolder = wrapper.find(Selectors.FolderComponentFolder);
+  const treeFolderTitle = wrapper.findAll(Selectors.FolderComponentFolderTitle);
+  const fileName = wrapper.find(Selectors.FileComponentFileName);
 
   expect(treeFolder.exists()).toBeTruthy();
   expect(treeFolderTitle.at(1).html()).toContain("dc");
@@ -42,9 +42,9 @@ test("when input has one folder two files, render tree structure with one subfol
   const wrapper = mount(App);
   await simulateClickWithValue(wrapper, UserInput.OneFoldersTwoFiles);
 
-  const fileItems = wrapper.findAll(selectors.FileComponentFileName);
-  const treeFolders = wrapper.findAll(selectors.FolderComponentFolder);
-  const treeFolderTitle = wrapper.findAll(selectors.FolderComponentFolderTitle);
+  const fileItems = wrapper.findAll(Selectors.FileComponentFileName);
+  const treeFolders = wrapper.findAll(Selectors.FolderComponentFolder);
+  const treeFolderTitle = wrapper.findAll(Selectors.FolderComponentFolderTitle);
 
   expect(fileItems.length).toBe(2);
   expect(treeFolders.length).toBe(2);
@@ -56,9 +56,9 @@ test("when input has two folders one file each, render tree structure with two s
   const wrapper = mount(App);
   await simulateClickWithValue(wrapper, UserInput.TwoFoldersOneFileEach);
 
-  const fileItems = wrapper.findAll(selectors.FileComponentFileName);
-  const treeFolders = wrapper.findAll(selectors.FolderComponentFolder);
-  const treeFolderTitle = wrapper.findAll(selectors.FolderComponentFolderTitle);
+  const fileItems = wrapper.findAll(Selectors.FileComponentFileName);
+  const treeFolders = wrapper.findAll(Selectors.FolderComponentFolder);
+  const treeFolderTitle = wrapper.findAll(Selectors.FolderComponentFolderTitle);
 
   expect(fileItems.length).toBe(2);
   expect(treeFolders.length).toBe(3);

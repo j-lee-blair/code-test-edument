@@ -1,16 +1,16 @@
 export async function setInputAndClickOk(wrapper, element, value) {
   element.setValue(value);
-  const button = await wrapper.find(selectors.InputFormbutton);
+  const button = await wrapper.find(Selectors.InputFormbutton);
   button.trigger("click");
 }
 
 export async function simulateClickWithValue(wrapper, inputString) {
-  const inputField = await wrapper.find(selectors.InputFormInputField);
+  const inputField = await wrapper.find(Selectors.InputFormInputField);
 
   await setInputAndClickOk(wrapper, inputField, inputString);
 }
 
-export const selectors = {
+export const Selectors = {
   InputForm: '[t-id="InputForm"]',
   InputFormInputField: '[t-id="InputForm-input-field"]',
   InputFormbutton: '[t-id="InputForm-button"]',
