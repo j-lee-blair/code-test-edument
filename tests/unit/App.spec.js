@@ -2,7 +2,7 @@ import App from "../../src/App";
 import { mount } from "@vue/test-utils";
 import { selectors, simulateClickWithValue, UserInput } from "./helpers";
 
-test("when string array valid and click ok, should switch to tree view", async () => {
+test("when input and click ok, should switch to tree view", async () => {
   const wrapper = mount(App);
   await simulateClickWithValue(wrapper, UserInput.OneFolderOneFile);
 
@@ -12,7 +12,7 @@ test("when string array valid and click ok, should switch to tree view", async (
   expect(inputForm.exists()).toBeFalsy();
 });
 
-test("when input array has one file only, render tree structure with one file no subfolders", async () => {
+test("when input has one file only, render tree structure with one file no subfolders", async () => {
   const wrapper = mount(App);
   await simulateClickWithValue(wrapper, UserInput.OneFileOnly);
 
@@ -25,7 +25,7 @@ test("when input array has one file only, render tree structure with one file no
   expect(fileName.html()).toContain("character_list.txt");
 });
 
-test("when input array has one folder and one file, render tree structure with one subfolder and one file", async () => {
+test("when input has one folder one file, render tree structure with one subfolder one file", async () => {
   const wrapper = mount(App);
   await simulateClickWithValue(wrapper, UserInput.OneFolderOneFile);
 
@@ -38,7 +38,7 @@ test("when input array has one folder and one file, render tree structure with o
   expect(fileName.html()).toContain("character_list.txt");
 });
 
-test("when input has duplicate folder and two files, render tree structure with one subfolder and two file", async () => {
+test("when input has one folder two files, render tree structure with one subfolder two files", async () => {
   const wrapper = mount(App);
   await simulateClickWithValue(wrapper, UserInput.OneFoldersTwoFiles);
 
@@ -52,7 +52,7 @@ test("when input has duplicate folder and two files, render tree structure with 
   expect(treeFolderTitle.at(1).html()).toContain("dc");
 });
 
-test("when input has two unique folders with one file each, render tree structure with two subfolders and each with one file", async () => {
+test("when input has two folders one file each, render tree structure with two subfolders one file each", async () => {
   const wrapper = mount(App);
   await simulateClickWithValue(wrapper, UserInput.TwoFoldersOneFileEach);
 

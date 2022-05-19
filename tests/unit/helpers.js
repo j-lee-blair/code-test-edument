@@ -23,6 +23,7 @@ export const selectors = {
 
 export const UserInput = {
   TwoFoldersOneFileEach: `["dc/character_list.txt", "baz/the-doctor.png"]`,
+  OneFileOnly: `["character_list.txt"]`,
   OneFoldersTwoFiles: `["dc/character_list.txt", "dc/the-doctor.png"]`,
   OneFolderOneFile: `["dc/character_list.txt"]`,
 };
