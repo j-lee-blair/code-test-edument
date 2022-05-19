@@ -2,6 +2,9 @@ import App from "../../src/App";
 import { mount } from "@vue/test-utils";
 import { Selectors, simulateClickWithValue, UserInput } from "./helpers";
 
+const FILE_C_LIST = "character_list.txt";
+const FOLDER_DC = "dc";
+
 test("when input and click ok, should switch to tree view", async () => {
   const wrapper = mount(App);
   await simulateClickWithValue(wrapper, UserInput.OneFolderOneFile);
@@ -22,7 +25,7 @@ test("when input has one file only, render tree structure with one file no subfo
 
   expect(treeFolders.length).toBe(1);
   expect(treeFolderTitle.at(0).html()).toContain("Root");
-  expect(fileName.html()).toContain("character_list.txt");
+  expect(fileName.html()).toContain(FILE_C_LIST);
 });
 
 test("when input has one folder one file, render tree structure with one subfolder one file", async () => {
@@ -34,8 +37,8 @@ test("when input has one folder one file, render tree structure with one subfold
   const fileName = wrapper.find(Selectors.FileComponentFileName);
 
   expect(treeFolder.exists()).toBeTruthy();
-  expect(treeFolderTitle.at(1).html()).toContain("dc");
-  expect(fileName.html()).toContain("character_list.txt");
+  expect(treeFolderTitle.at(1).html()).toContain(FOLDER_DC);
+  expect(fileName.html()).toContain(FILE_C_LIST);
 });
 
 test("when input has one folder two files, render tree structure with one subfolder two files", async () => {
@@ -48,8 +51,8 @@ test("when input has one folder two files, render tree structure with one subfol
 
   expect(fileItems.length).toBe(2);
   expect(treeFolders.length).toBe(2);
-  expect(fileItems.at(0).html()).toContain("character_list.txt");
-  expect(treeFolderTitle.at(1).html()).toContain("dc");
+  expect(fileItems.at(0).html()).toContain(FILE_C_LIST);
+  expect(treeFolderTitle.at(1).html()).toContain(FOLDER_DC);
 });
 
 test("when input has two folders one file each, render tree structure with two subfolders one file each", async () => {
@@ -62,8 +65,8 @@ test("when input has two folders one file each, render tree structure with two s
 
   expect(fileItems.length).toBe(2);
   expect(treeFolders.length).toBe(3);
-  expect(fileItems.at(0).html()).toContain("character_list.txt");
+  expect(fileItems.at(0).html()).toContain(FILE_C_LIST);
   expect(fileItems.at(1).html()).toContain("the-doctor.png");
-  expect(treeFolderTitle.at(1).html()).toContain("dc");
+  expect(treeFolderTitle.at(1).html()).toContain(FOLDER_DC);
   expect(treeFolderTitle.at(2).html()).toContain("baz");
 });
