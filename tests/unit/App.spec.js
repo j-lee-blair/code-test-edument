@@ -12,6 +12,19 @@ test("when string array valid and click ok, should switch to tree view", async (
   expect(inputForm.exists()).toBeFalsy();
 });
 
+test("when input array has one file only, render tree structure with one file no subfolders", async () => {
+  const wrapper = mount(App);
+  await simulateClickWithValue(wrapper, UserInput.OneFileOnly);
+
+  const treeFolders = wrapper.findAll(selectors.FolderComponentFolder);
+  const treeFolderTitle = wrapper.findAll(selectors.FolderComponentFolderTitle);
+  const fileName = wrapper.find(selectors.FileComponentFileName);
+
+  expect(treeFolders.length).toBe(1);
+  expect(treeFolderTitle.at(0).html()).toContain("Root");
+  expect(fileName.html()).toContain("character_list.txt");
+});
+
 test("when input array has one folder and one file, render tree structure with one subfolder and one file", async () => {
   const wrapper = mount(App);
   await simulateClickWithValue(wrapper, UserInput.OneFolderOneFile);
