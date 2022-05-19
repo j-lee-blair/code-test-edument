@@ -76,8 +76,8 @@ input:active{
 .container{
     margin-inline: auto;
     width: min(90%, 70.5rem);
-    height: 100vh;
     background: var(--clr-secondary-100);
+    min-height: 100vh;
 }
 
 .split{
@@ -119,8 +119,4 @@ section + section {
     .button{
         min-width: 1rem;
     }
-
-    /* section + section {
-        margin-top: 16rem;
-    } */
 }
