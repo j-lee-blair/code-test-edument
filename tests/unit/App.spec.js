@@ -16,11 +16,9 @@ test("when input array has one folder and one file, render tree structure with o
   const wrapper = mount(App);
   await simulateClickWithValue(wrapper, UserInput.OneFolderOneFile);
 
-  const treeFolder = await wrapper.find(selectors.FolderComponentFolder);
-  const treeFolderTitle = await wrapper.findAll(
-    selectors.FolderComponentFolderTitle
-  );
-  const fileName = await wrapper.find(selectors.FileComponentFileName);
+  const treeFolder = wrapper.find(selectors.FolderComponentFolder);
+  const treeFolderTitle = wrapper.findAll(selectors.FolderComponentFolderTitle);
+  const fileName = wrapper.find(selectors.FileComponentFileName);
 
   expect(treeFolder.exists()).toBeTruthy();
   expect(treeFolderTitle.at(1).html()).toContain("dc");
@@ -31,11 +29,9 @@ test("when input has duplicate folder and two files, render tree structure with 
   const wrapper = mount(App);
   await simulateClickWithValue(wrapper, UserInput.OneFoldersTwoFiles);
 
-  const fileItems = await wrapper.findAll(selectors.FileComponentFileName);
-  const treeFolders = await wrapper.findAll(selectors.FolderComponentFolder);
-  const treeFolderTitle = await wrapper.findAll(
-    selectors.FolderComponentFolderTitle
-  );
+  const fileItems = wrapper.findAll(selectors.FileComponentFileName);
+  const treeFolders = wrapper.findAll(selectors.FolderComponentFolder);
+  const treeFolderTitle = wrapper.findAll(selectors.FolderComponentFolderTitle);
 
   expect(fileItems.length).toBe(2);
   expect(treeFolders.length).toBe(2);
