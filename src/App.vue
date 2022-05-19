@@ -8,7 +8,7 @@
         <component
           :is="activeView"
           @childCallback="handleCallback"
-          :propsData="folders"
+          :propsData="root"
         />
       </keep-alive>
     </section>
@@ -17,8 +17,8 @@
 
 <script>
 import InputForm from "./components/InputForm.vue";
-import TreeComponent from "./components/TreeComponent.vue";
-import { toFolderList } from "./dataUtilities";
+import TreeComponent from "./components/TreeComponent/TreeComponent.vue";
+import { toTreeStructure } from "./dataUtilities";
 export default {
   name: "App",
   components: {
@@ -28,14 +28,15 @@ export default {
   data: function () {
     return {
       activeView: "InputForm",
-      folders: [],
+      root: {},
     };
   },
   methods: {
-    handleCallback(data = [], componentName = "") {
+    async handleCallback(data = {}, componentName = "") {
       switch (componentName) {
         case "InputForm":
-          this.folders = toFolderList(data);
+          this.root = await toTreeStructure(data);
+          // console.log("App:: root= ", JSON.stringify(this.root));
           this.activeView = "TreeComponent";
           break;
         default:

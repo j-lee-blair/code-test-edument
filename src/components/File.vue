@@ -1,7 +1,7 @@
 <template>
-  <div t-id="File-file-name" class="left-indent">
+  <div class="left-indent">
     <i class="icon material-icons">insert_drive_file</i>
-    <p class="title">
+    <p t-id="File-file-name" class="title">
       {{ fileName }}
     </p>
   </div>

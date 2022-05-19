@@ -3,7 +3,7 @@
     <div t-id="Folder-folder" class="folder">
       <i class="icon material-icons">folder</i>
       <p t-id="Folder-folder-title" class="title">{{ folder.name }}</p>
-      <div v-for="file in folder.files" :key="file">
+      <div v-for="file in entries[1].files" :key="file">
         <File :fileName="file" />
       </div>
     </div>
@@ -14,18 +14,19 @@
 import File from "./File.vue";
 export default {
   props: {
-    folder: Object,
+    entries: Array,
   },
   components: {
     File,
-  },
-  mounted() {
-    // console.log("FolderComp: ", this.folder);
   },
 };
 </script>
 
 <style scoped>
+.folder {
+  margin-left: 0.5rem;
+}
+
 .folder::before {
   content: ">";
   margin-right: 0.5rem;

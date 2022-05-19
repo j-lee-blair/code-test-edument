@@ -1,27 +1,29 @@
-export function toFolderList(rawData) {
-  let filePathWithFile = rawData.flatMap((string) => string.split("/"));
-  return filePathWithFile.reduce(toFolderStructure, {});
-}
-
-function toFolderStructure(acc, val) {
-  if (isFolder(val)) {
-    //is folder
-    if (!acc.folders) {
-      acc.folders = [{ name: val }];
-    } else {
-      acc.folders.push(val);
-    }
-  } else {
-    // is file
-    if (!acc.folders[0].files) {
-      acc.folders[0].files = [val];
-    } else {
-      acc.folders[0].files.push(val);
-    }
+class Folder {
+  constructor() {
+    this.folders = {};
+    this.files = [];
   }
-  return acc;
 }
 
-function isFolder(value) {
-  return value.indexOf(".") === -1;
+export async function toTreeStructure(data) {
+  let paths = data.map((x) => x.split("/"));
+
+  let tree = {};
+  tree["root"] = new Folder();
+
+  paths.forEach((filePath) => {
+    let currentFolder = tree.root;
+
+    for (let i = 0; i < filePath.length - 1; i++) {
+      var name = filePath[i];
+      if (!currentFolder.folders[name]) {
+        currentFolder.folders[name] = new Folder();
+      }
+      currentFolder = currentFolder.folders[name];
+    }
+    currentFolder.files.push(filePath[filePath.length - 1]);
+    return currentFolder;
+  });
+
+  return tree.root;
 }
