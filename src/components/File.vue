@@ -28,6 +28,6 @@ export default {
 }
 
 .left-indent {
-  margin-left: 2rem;
+  margin-left: 2.6rem;
 }
 </style>
