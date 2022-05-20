@@ -5,7 +5,7 @@ import { Selectors, simulateClickWithValue, UserInput } from "./helpers";
 const FILE_C_LIST = "character_list.txt";
 const FOLDER_DC = "dc";
 
-test("when input and click ok, should switch to tree view", async () => {
+test("when input valid and click ok, should switch to tree view", async () => {
   const wrapper = mount(App);
   await simulateClickWithValue(wrapper, UserInput.OneFolderOneFile);
 
