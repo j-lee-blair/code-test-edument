@@ -1,13 +1,27 @@
+import { mount } from "@vue/test-utils";
+
+export async function simulateClickWithValue(wrapper, inputString) {
+  const inputField = await wrapper.find(Selectors.InputFormInputField);
+
+  await setInputAndClickOk(wrapper, inputField, inputString);
+}
+
 export async function setInputAndClickOk(wrapper, element, value) {
   element.setValue(value);
   const button = await wrapper.find(Selectors.InputFormbutton);
   button.trigger("click");
 }
 
-export async function simulateClickWithValue(wrapper, inputString) {
-  const inputField = await wrapper.find(Selectors.InputFormInputField);
+export async function findAllElementsAndClickFirst(wrapper, selector) {
+  const element = await wrapper.findAll(selector);
+  element.trigger("click");
+  return element;
+}
 
-  await setInputAndClickOk(wrapper, inputField, inputString);
+export function mountWithProps(Component, options = {}) {
+  return mount(Component, {
+    propsData: options,
+  });
 }
 
 export const Selectors = {
