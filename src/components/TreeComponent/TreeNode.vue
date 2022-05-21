@@ -1,22 +1,33 @@
 <template>
-  <div class="folder">
-    <span t-id="Folder-folder" @click="toggleParentActive">
-      <i class="icon material-icons">folder</i>
-      <p t-id="Folder-folder-title" class="title">{{ label }}</p>
-    </span>
-    <Transition>
-      <div v-if="parentActive">
-        <div v-if="node.files">
-          <File v-for="file in node.files" :key="file" :fileName="file"></File>
+  <div>
+    <div class="folder">
+      <span t-id="Folder-folder" @click="toggleParentActive">
+        <i
+          class="icon material-symbols-outlined arrow"
+          :class="parentActive ? 'open' : ''"
+          >play_arrow</i
+        >
+        <i class="icon material-symbols-outlined">folder</i>
+        <p t-id="Folder-folder-title" class="title">{{ label }}</p>
+      </span>
+      <Transition>
+        <div v-if="parentActive">
+          <div v-if="node.files">
+            <File
+              v-for="file in node.files"
+              :key="file"
+              :fileName="file"
+            ></File>
+          </div>
+          <node
+            v-for="(folder, key) of node.folders"
+            :key="key"
+            :node="folder"
+            :label="key"
+          />
         </div>
-        <node
-          v-for="(folder, key) of node.folders"
-          :key="key"
-          :node="folder"
-          :label="key"
-        />
-      </div>
-    </Transition>
+      </Transition>
+    </div>
   </div>
 </template>
 
@@ -48,10 +59,10 @@ export default {
 </script>
 
 <style scoped>
-.folder::before {
+/* .folder::before {
   content: ">";
   margin-right: 0.5rem;
-}
+} */
 
 .folder {
   margin-left: 1.5rem;
@@ -60,6 +71,15 @@ export default {
 .icon {
   vertical-align: middle;
   font-size: 1.8rem;
+}
+
+.arrow {
+  transform: rotate(0deg);
+  transition: transform 0.1s ease-out;
+}
+
+.arrow.open {
+  transform: rotate(90deg);
 }
 
 .title {

@@ -1,6 +1,6 @@
 <template>
   <div class="left-indent">
-    <i class="icon material-icons">insert_drive_file</i>
+    <i class="icon material-symbols-outlined">insert_drive_file</i>
     <p t-id="File-file-name" class="title">
       {{ fileName }}
     </p>
