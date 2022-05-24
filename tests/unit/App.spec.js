@@ -98,7 +98,7 @@ test("when input has two folders one file each, render tree structure with two s
   expect(treeFolderTitle.at(2).html()).toContain("baz");
 });
 
-it("when input has one folder click add folder and confirm, should add subfolder", async () => {
+it("when root has one folder click add folder enter value and confirm, should render subfolder with correct label", async () => {
   const wrapper = mount(App);
 
   await simulateClickJsonInputOkWithValue(
