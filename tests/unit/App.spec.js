@@ -4,10 +4,13 @@ import {
   Selectors,
   simulateClickJsonInputOkWithValue,
   UserInput,
+  simulateClickConfirmNewFolderButtonWithValue,
+  findAllElementsAndClickFirst,
 } from "./helpers";
 
 const FILE_C_LIST = "character_list.txt";
 const FOLDER_DC = "dc";
+const validInput = "NEW_INPUT";
 
 test("when input valid and click ok, should switch to tree view", async () => {
   const wrapper = mount(App);
@@ -93,4 +96,24 @@ test("when input has two folders one file each, render tree structure with two s
   expect(fileItems.at(1).html()).toContain("the-doctor.png");
   expect(treeFolderTitle.at(1).html()).toContain(FOLDER_DC);
   expect(treeFolderTitle.at(2).html()).toContain("baz");
+});
+
+it("when input has one folder click add folder and confirm, should add subfolder", async () => {
+  const wrapper = mount(App);
+
+  await simulateClickJsonInputOkWithValue(
+    wrapper,
+    UserInput.OneFolderOneFile,
+    Selectors.InputFormInputField
+  );
+  await findAllElementsAndClickFirst(wrapper, Selectors.FolderComponentAdd);
+  await simulateClickConfirmNewFolderButtonWithValue(
+    wrapper,
+    validInput,
+    Selectors.FolderComponentNewFolderInput
+  );
+  const folders = wrapper.findAll(Selectors.FolderComponentFolder);
+
+  expect(folders.length).toBe(3);
+  expect(folders.at(2).html()).toContain(validInput);
 });
