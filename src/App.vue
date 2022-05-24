@@ -33,10 +33,16 @@ export default {
   },
   methods: {
     async handleCallback(data = {}, componentName = "") {
+      //console.log("handleCallBack: ", data, componentName);
       switch (componentName) {
         case "InputForm":
           this.root = await toTreeStructure(data);
           // console.log("App:: root= ", JSON.stringify(this.root));
+          this.activeView = "TreeComponent";
+          break;
+        case "TreeComponent":
+          console.log("App:: ", data);
+          this.root = data;
           this.activeView = "TreeComponent";
           break;
         default:

@@ -5,6 +5,13 @@ class Folder {
   }
 }
 
+export function CreateFolder(currentFolder, newNodeLabel) {
+  let existingFolders = { ...currentFolder };
+  const newFolder = new Folder();
+  existingFolders.folders[newNodeLabel] = newFolder;
+  return existingFolders;
+}
+
 export async function toTreeStructure(data) {
   let paths = data.map((x) => x.split("/"));
 

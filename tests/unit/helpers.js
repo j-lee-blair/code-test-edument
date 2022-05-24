@@ -12,6 +12,13 @@ export async function setInputAndClickOk(wrapper, element, value) {
   button.trigger("click");
 }
 
+export async function setAddFolderInputAndClickOk(wrapper, selector, value) {
+  const element = await wrapper.find(selector);
+  element.setValue(value);
+  const button = await wrapper.find(Selectors.FolderComponentAdd);
+  button.trigger("click");
+}
+
 export async function findAllElementsAndClickFirst(wrapper, selector) {
   const element = await wrapper.findAll(selector);
   element.trigger("click");
@@ -32,6 +39,8 @@ export const Selectors = {
   TreeComponent: '[t-id="TreeComponent"]',
   FolderComponentFolder: '[t-id="Folder-folder"]',
   FolderComponentFolderTitle: '[t-id="Folder-folder-title"]',
+  FolderComponentAdd: '[t-id="Folder-folder-add"]',
+  FolderComponentNewFolderInput: '[t-id="Folder-new-folder-input"]',
   FileComponentFileName: '[t-id="File-file-name"]',
 };
 

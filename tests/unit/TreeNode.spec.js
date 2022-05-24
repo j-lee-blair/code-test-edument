@@ -3,6 +3,7 @@ import {
   mountWithProps,
   findAllElementsAndClickFirst,
   Selectors,
+  setAddFolderInputAndClickOk,
 } from "./helpers";
 
 describe("TreeComponent.vue", () => {
@@ -18,6 +19,15 @@ describe("TreeComponent.vue", () => {
     },
   };
 
+  const validInput = "NEW_INPUT";
+  const EMITTED = {
+    files: [],
+    folders: {
+      NEW_INPUT: { files: [], folders: {} },
+      dc: { files: ["character_list.txt"], folders: {} },
+    },
+  };
+
   it("when click root folder, should collapse subfolders", async () => {
     const wrapper = mountWithProps(TreeComponent, treeData);
 
@@ -28,5 +38,18 @@ describe("TreeComponent.vue", () => {
     const folders = wrapper.findAll(Selectors.FolderComponentFolder);
 
     expect(folders.length).toBe(1);
+  });
+
+  it("when click add folder, should add subfolder to root", async () => {
+    const wrapper = mountWithProps(TreeComponent, treeData);
+
+    await findAllElementsAndClickFirst(wrapper, Selectors.FolderComponentAdd);
+    await setAddFolderInputAndClickOk(
+      wrapper,
+      Selectors.FolderComponentNewFolderInput,
+      validInput
+    );
+
+    expect(wrapper.emitted().childCallback[0][0]).toEqual(EMITTED);
   });
 });
