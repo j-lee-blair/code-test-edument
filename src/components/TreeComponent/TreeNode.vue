@@ -22,7 +22,7 @@
           <div v-if="showInputField">
             <div class="input-icon">
               <i
-                t-id="Folder-folder-add"
+                t-id="Folder-folder-add-confirm"
                 class="icon input-btn material-symbols-outlined"
                 @click="addSubfolder"
                 >add</i

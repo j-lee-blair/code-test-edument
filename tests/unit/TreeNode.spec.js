@@ -3,7 +3,7 @@ import {
   mountWithProps,
   findAllElementsAndClickFirst,
   Selectors,
-  setAddFolderInputAndClickOk,
+  simulateClickConfirmNewFolderButtonWithValue,
 } from "./helpers";
 
 describe("TreeComponent.vue", () => {
@@ -40,14 +40,14 @@ describe("TreeComponent.vue", () => {
     expect(folders.length).toBe(1);
   });
 
-  it("when click add folder, should add subfolder to root", async () => {
+  it("when click add folder and enter valid folder name, should emit folder to be added", async () => {
     const wrapper = mountWithProps(TreeComponent, treeData);
 
     await findAllElementsAndClickFirst(wrapper, Selectors.FolderComponentAdd);
-    await setAddFolderInputAndClickOk(
+    await simulateClickConfirmNewFolderButtonWithValue(
       wrapper,
-      Selectors.FolderComponentNewFolderInput,
-      validInput
+      validInput,
+      Selectors.FolderComponentNewFolderInput
     );
 
     expect(wrapper.emitted().childCallback[0][0]).toEqual(EMITTED);

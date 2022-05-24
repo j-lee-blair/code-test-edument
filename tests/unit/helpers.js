@@ -1,9 +1,12 @@
 import { mount } from "@vue/test-utils";
 
-export async function simulateClickWithValue(wrapper, inputString) {
-  const inputField = await wrapper.find(Selectors.InputFormInputField);
-
-  await setInputAndClickOk(wrapper, inputField, inputString);
+export async function simulateClickJsonInputOkWithValue(
+  wrapper,
+  inputString,
+  selector
+) {
+  const element = await wrapper.find(selector);
+  await setInputAndClickOk(wrapper, element, inputString);
 }
 
 export async function setInputAndClickOk(wrapper, element, value) {
@@ -12,10 +15,18 @@ export async function setInputAndClickOk(wrapper, element, value) {
   button.trigger("click");
 }
 
-export async function setAddFolderInputAndClickOk(wrapper, selector, value) {
+export async function simulateClickConfirmNewFolderButtonWithValue(
+  wrapper,
+  inputString,
+  selector
+) {
   const element = await wrapper.find(selector);
+  await setAddFolderInputAndClickOk(wrapper, element, inputString);
+}
+
+export async function setAddFolderInputAndClickOk(wrapper, element, value) {
   element.setValue(value);
-  const button = await wrapper.find(Selectors.FolderComponentAdd);
+  const button = await wrapper.find(Selectors.FolderComponentAddConfirm);
   button.trigger("click");
 }
 
@@ -40,6 +51,7 @@ export const Selectors = {
   FolderComponentFolder: '[t-id="Folder-folder"]',
   FolderComponentFolderTitle: '[t-id="Folder-folder-title"]',
   FolderComponentAdd: '[t-id="Folder-folder-add"]',
+  FolderComponentAddConfirm: '[t-id="Folder-folder-add-confirm"]',
   FolderComponentNewFolderInput: '[t-id="Folder-new-folder-input"]',
   FileComponentFileName: '[t-id="File-file-name"]',
 };

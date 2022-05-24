@@ -1,13 +1,21 @@
 import App from "../../src/App";
 import { mount } from "@vue/test-utils";
-import { Selectors, simulateClickWithValue, UserInput } from "./helpers";
+import {
+  Selectors,
+  simulateClickJsonInputOkWithValue,
+  UserInput,
+} from "./helpers";
 
 const FILE_C_LIST = "character_list.txt";
 const FOLDER_DC = "dc";
 
 test("when input valid and click ok, should switch to tree view", async () => {
   const wrapper = mount(App);
-  await simulateClickWithValue(wrapper, UserInput.OneFolderOneFile);
+  await simulateClickJsonInputOkWithValue(
+    wrapper,
+    UserInput.OneFolderOneFile,
+    Selectors.InputFormInputField
+  );
 
   const treeComp = wrapper.find(Selectors.TreeComponent);
   const inputForm = wrapper.find(Selectors.InputForm);
@@ -17,7 +25,11 @@ test("when input valid and click ok, should switch to tree view", async () => {
 
 test("when input has one file only, render tree structure with one file no subfolders", async () => {
   const wrapper = mount(App);
-  await simulateClickWithValue(wrapper, UserInput.OneFileOnly);
+  await simulateClickJsonInputOkWithValue(
+    wrapper,
+    UserInput.OneFileOnly,
+    Selectors.InputFormInputField
+  );
 
   const treeFolders = wrapper.findAll(Selectors.FolderComponentFolder);
   const treeFolderTitle = wrapper.findAll(Selectors.FolderComponentFolderTitle);
@@ -30,7 +42,11 @@ test("when input has one file only, render tree structure with one file no subfo
 
 test("when input has one folder one file, render tree structure with one subfolder one file", async () => {
   const wrapper = mount(App);
-  await simulateClickWithValue(wrapper, UserInput.OneFolderOneFile);
+  await simulateClickJsonInputOkWithValue(
+    wrapper,
+    UserInput.OneFolderOneFile,
+    Selectors.InputFormInputField
+  );
 
   const treeFolder = wrapper.find(Selectors.FolderComponentFolder);
   const treeFolderTitle = wrapper.findAll(Selectors.FolderComponentFolderTitle);
@@ -43,7 +59,11 @@ test("when input has one folder one file, render tree structure with one subfold
 
 test("when input has one folder two files, render tree structure with one subfolder two files", async () => {
   const wrapper = mount(App);
-  await simulateClickWithValue(wrapper, UserInput.OneFoldersTwoFiles);
+  await simulateClickJsonInputOkWithValue(
+    wrapper,
+    UserInput.OneFoldersTwoFiles,
+    Selectors.InputFormInputField
+  );
 
   const fileItems = wrapper.findAll(Selectors.FileComponentFileName);
   const treeFolders = wrapper.findAll(Selectors.FolderComponentFolder);
@@ -57,7 +77,11 @@ test("when input has one folder two files, render tree structure with one subfol
 
 test("when input has two folders one file each, render tree structure with two subfolders one file each", async () => {
   const wrapper = mount(App);
-  await simulateClickWithValue(wrapper, UserInput.TwoFoldersOneFileEach);
+  await simulateClickJsonInputOkWithValue(
+    wrapper,
+    UserInput.TwoFoldersOneFileEach,
+    Selectors.InputFormInputField
+  );
 
   const fileItems = wrapper.findAll(Selectors.FileComponentFileName);
   const treeFolders = wrapper.findAll(Selectors.FolderComponentFolder);
