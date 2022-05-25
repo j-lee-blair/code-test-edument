@@ -11,7 +11,7 @@
         <p t-id="Folder-folder-title" class="title">{{ label }}</p>
       </span>
       <i
-        v-if="!showInputField"
+        v-if="parentActive && !showInputField"
         t-id="Folder-folder-add"
         class="icon button button-add material-symbols-outlined"
         @click="toggleInputField"
@@ -112,6 +112,7 @@ export default {
     },
     toggleInputField() {
       //this.inputData = "";
+
       this.showInputField = !this.showInputField;
     },
   },
