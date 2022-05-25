@@ -13,16 +13,9 @@ class Props {
 }
 
 export function CreateFolder(currentFolder, newNodeLabel, parent = "Root") {
-  let existingFolders = { ...currentFolder }; //"dc's" folders object
-
+  let existingFolders = { ...currentFolder };
   const newFolder = new Folder();
-  console.log("newNodeLabel");
   existingFolders.folders[newNodeLabel] = newFolder;
-  console.log(
-    "CreateFolder::currentFolder:: aft ",
-    JSON.stringify(existingFolders),
-    parent
-  ); //100% correct here
   return new Props(existingFolders, parent);
 }
 

@@ -24,7 +24,7 @@
               <i
                 t-id="Folder-folder-add-confirm"
                 class="icon input-btn material-symbols-outlined"
-                @click="handleAdd(node, inputIsValid, inputData, label)"
+                @click="handleAdd(node, inputIsValid, inputData)"
                 >add</i
               >
               <input
@@ -51,7 +51,6 @@
             :node="folder"
             :label="key"
             :handle-add="handleAdd"
-            :parentNodeKey="parentLabel"
           />
         </div>
       </Transition>
@@ -61,7 +60,6 @@
 
 <script>
 import File from "../File.vue";
-// import { CreateFolder } from "../../dataUtilities";
 
 export default {
   name: "node",
@@ -71,7 +69,6 @@ export default {
       type: String,
       default: "Root",
     },
-    parentNodeKey: String,
     handleAdd: Function,
   },
   data() {
@@ -93,24 +90,6 @@ export default {
     toggleInputField() {
       this.showInputField = !this.showInputField;
     },
-    // addSubfolder() {
-    //   if (this.inputIsValid()) {
-    //     const updatedNode = CreateFolder(this.node, this.inputData);
-    //     console.log("updatedNode: ", updatedNode);
-    //     this.updateTopNode(updatedNode);
-    //     //this.inputError = false;
-    //     this.newEntry = "";
-    //   }
-    // },
-    // inputIsValid() {
-    //   this.inputError =
-    //     Object.keys(this.node.folders).indexOf(this.inputData) === -1 &&
-    //     this.inputData !== "";
-    //   return this.inputError;
-    // },
-    // updateTopNode(props) {
-    //   this.$emit("update-tree", props);
-    // },
   },
   computed: {
     inputIsValid() {

@@ -32,25 +32,13 @@ export default {
     };
   },
   methods: {
-    async handleCallback(data = {}, componentName = "", parentKey = "") {
-      console.log(
-        "handleCallBack: ",
-        JSON.stringify(data),
-        componentName,
-        parentKey
-      );
-
+    async handleCallback(data = {}, componentName = "") {
       switch (componentName) {
         case "InputForm":
           this.root = await toTreeStructure(data);
-          // console.log("App:: root= ", JSON.stringify(this.root));
           this.activeView = "TreeComponent";
           break;
         case "TreeComponent":
-          console.log("App:: ", JSON.stringify(data));
-
-          //parentKey !== "" ? (this.root[parentKey] = data) : (this.root = data);
-
           this.activeView = "TreeComponent";
           break;
         default:

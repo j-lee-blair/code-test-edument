@@ -27,42 +27,22 @@ export default {
     TreeNode,
   },
   methods: {
-    handleAdd(updatedNode, inputIsValid, newNodeLabel, parentKey) {
-      console.log(
-        "TreeComponent::handleAdd:: ",
-        JSON.stringify(updatedNode),
-        newNodeLabel,
-        parentKey
-      );
+    handleAdd(updatedNode, inputIsValid, newNodeLabel) {
       if (inputIsValid) {
-        const { node, parent } = CreateFolder(
-          updatedNode,
-          newNodeLabel,
-          parentKey
-        );
-        console.log("updatedNode: ", JSON.stringify(node));
+        const { node, parent } = CreateFolder(updatedNode, newNodeLabel);
         this.updateTree(node, parent);
-        //this.inputError = false;
-        this.newEntry = "";
         this.forceRerender();
       } else {
         console.log("invalid input");
         //TODO: handle else
       }
     },
-    updateTree(updatedNode, parentKey) {
-      //console.log("TreeComponent listenener", updatedNode, parentKey);
-      this.$emit("childCallback", updatedNode, this.$options.name, parentKey);
+    updateTree(updatedNode) {
+      this.$emit("childCallback", updatedNode, this.$options.name);
     },
     forceRerender() {
       this.renderKey += 1;
     },
-    // inputIsValid() {
-    //   this.inputError =
-    //     Object.keys(this.node.folders).indexOf(this.inputData) === -1 &&
-    //     this.inputData !== "";
-    //   return this.inputError;
-    // },
   },
 };
 </script>
