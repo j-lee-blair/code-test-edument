@@ -32,9 +32,6 @@ export default {
         const node = CreateFolder(updatedNode, newNodeLabel);
         this.updateTree(node);
         this.forceRerender();
-      } else {
-        console.log("invalid input");
-        //TODO: handle else
       }
     },
     updateTree(updatedNode) {
