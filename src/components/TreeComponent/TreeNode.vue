@@ -14,7 +14,7 @@
         v-if="!showInputField"
         t-id="Folder-folder-add"
         class="icon button button-add material-symbols-outlined"
-        @click="showInputField = true"
+        @click="toggleInputField"
         >add</i
       >
       <Transition>
@@ -23,9 +23,14 @@
             <div class="input-icon">
               <i
                 t-id="Folder-folder-add-confirm"
-                class="icon input-btn material-symbols-outlined"
+                class="icon input-btn confirm material-symbols-outlined"
                 @click="handleAdd(node, inputIsValid, inputData)"
                 >add</i
+              >
+              <i
+                class="icon input-btn close material-symbols-outlined"
+                @click="toggleInputField"
+                >close</i
               >
               <input
                 t-id="Folder-new-folder-input"
@@ -35,6 +40,15 @@
                 placeholder="Enter new folder"
                 maxlength="30"
                 v-model="inputData"
+              />
+
+              <ErrorMsg
+                t-id="TreeNode-error-duplicate-folder"
+                message="Duplicate folder"
+                :show="!inputIsValid && inputError"
+                :centered="false"
+                class="errMsg"
+                marginSmall
               />
             </div>
           </div>
@@ -60,6 +74,7 @@
 
 <script>
 import File from "../File.vue";
+import ErrorMsg from "../ErrorMsg.vue";
 
 export default {
   name: "node",
@@ -79,8 +94,16 @@ export default {
       inputError: false,
     };
   },
+
+  updated() {
+    this.inputError = this.inputData !== "" && !this.inputIsValid;
+    if (this.showInputField) {
+      this.$refs.addFolder.focus();
+    }
+  },
   components: {
     File,
+    ErrorMsg,
   },
 
   methods: {
@@ -88,6 +111,7 @@ export default {
       this.parentActive = !this.parentActive;
     },
     toggleInputField() {
+      //this.inputData = "";
       this.showInputField = !this.showInputField;
     },
   },
@@ -98,27 +122,37 @@ export default {
         this.inputData !== ""
       );
     },
-    parentLabel() {
-      return this.label ? this.label : "Root";
-    },
   },
 };
 </script>
 
-<style>
+<style scoped>
+.errMsg {
+  font-size: 0.75em;
+}
+
 .icon {
   vertical-align: middle;
   font-size: 1.8rem;
 }
 
 .input-btn {
+  cursor: pointer;
+}
+
+.confirm {
   margin-left: 13.3rem;
   border: solid 0.5px black;
   max-height: 1.7rem;
   margin-top: 0.4rem;
   border-radius: 0.4rem;
   font-size: 1em;
+}
+
+.close {
   cursor: pointer;
+  margin-left: 15.5rem;
+  margin-top: 0.2rem;
 }
 
 .input-icon i {

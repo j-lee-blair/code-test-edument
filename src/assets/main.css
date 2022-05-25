@@ -55,14 +55,6 @@ input{
     border-radius: 0.5rem;
 }
 
-input:focus-visible{
-    box-shadow: 0 0 1.5rem var(--clr-accent-800);
-}
-
-input:active{
-    box-shadow: 0 0 1.5rem var(--clr-accent-800);
-}
-
 .input-field{
     min-width: 90%;
 }
@@ -83,6 +75,10 @@ input:active{
 .split{
     display: flex;
     justify-content: center;
+}
+
+.justify-left {
+    justify-content: left;
 }
 
 .text-center {

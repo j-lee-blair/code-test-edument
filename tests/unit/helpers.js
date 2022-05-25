@@ -60,6 +60,7 @@ export const Selectors = {
   FolderComponentAddConfirm: '[t-id="Folder-folder-add-confirm"]',
   FolderComponentNewFolderInput: '[t-id="Folder-new-folder-input"]',
   FileComponentFileName: '[t-id="File-file-name"]',
+  ErrorMsgDuplicateFolder: '[t-id="TreeNode-error-duplicate-folder"]',
 };
 
 export const UserInput = {

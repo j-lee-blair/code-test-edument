@@ -16,7 +16,7 @@
         @click="validateJsonString"
       />
     </div>
-    <ErrorMsg t-id="InputForm-json-error" :show="jsonInvalid" />
+    <ErrorMsg t-id="InputForm-json-error" :show="jsonInvalid" centered />
   </div>
 </template>
 

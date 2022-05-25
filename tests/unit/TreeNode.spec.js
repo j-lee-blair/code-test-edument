@@ -20,6 +20,7 @@ describe("TreeComponent.vue", () => {
   };
 
   const validInput = "NEW_INPUT";
+  const DUPLICATE_ENTRY = "dc";
   const EMITTED = {
     files: [],
     folders: {
@@ -51,5 +52,23 @@ describe("TreeComponent.vue", () => {
     );
 
     expect(wrapper.emitted().childCallback[0][0]).toEqual(EMITTED);
+  });
+
+  it("when click add folder and enter invalid folder name, should not emit folder and show Error", async () => {
+    const wrapper = mountWithProps(TreeComponent, treeData);
+
+    await findAllElementsAndClickFirst(wrapper, Selectors.FolderComponentAdd);
+    await simulateClickConfirmNewFolderButtonWithValue(
+      wrapper,
+      DUPLICATE_ENTRY,
+      Selectors.FolderComponentNewFolderInput
+    );
+
+    const errorMsgDuplicateFolder = wrapper.find(
+      Selectors.ErrorMsgDuplicateFolder
+    );
+
+    expect(wrapper.emitted().childCallback).toBeFalsy();
+    expect(errorMsgDuplicateFolder.exists()).toBeTruthy();
   });
 });

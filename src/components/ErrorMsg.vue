@@ -1,6 +1,9 @@
 <template>
-  <div v-if="show" class="split">
-    <div class="error-wrapper">
+  <div v-if="show" class="split" :class="centered ? '' : 'justify-left'">
+    <div
+      class="error-wrapper"
+      :class="marginSmall ? ['topBottomMargin widthSmall'] : ''"
+    >
       <div class="error">
         <p>
           {{ message }}
@@ -22,6 +25,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    centered: {
+      type: Boolean,
+      default: false,
+    },
+    marginSmall: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
@@ -29,25 +40,32 @@ export default {
 <style>
 @import "../assets/main.css";
 .error-wrapper {
+  font-size: 0.75em;
   margin: 1rem 0;
   border: 1px var(--clr-warning-800) solid;
   min-width: 90%;
 }
 
+.topBottomMargin {
+  margin: 0.2em 0;
+}
+
 .error {
   position: relative;
   background: var(--clr-warning-300);
-  opacity: 0.6;
-  min-height: 2rem;
 }
 
 .error > p {
-  color: var(--clr-dark-800);
+  color: var(--clr-neutral-900);
 }
 
 @media (min-width: 40rem) {
   .error-wrapper {
-    min-width: 18rem;
+    min-width: 22.75em;
   }
+}
+
+.widthSmall {
+  min-width: 20.3em;
 }
 </style>
