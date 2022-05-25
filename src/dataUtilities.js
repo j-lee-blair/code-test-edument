@@ -5,18 +5,11 @@ class Folder {
   }
 }
 
-class Props {
-  constructor(node, parent) {
-    this.node = node;
-    this.parent = parent;
-  }
-}
-
-export function CreateFolder(currentFolder, newNodeLabel, parent = "Root") {
-  let existingFolders = { ...currentFolder };
+export function CreateFolder(currentFolder, newNodeLabel) {
+  let updatedNode = { ...currentFolder };
   const newFolder = new Folder();
-  existingFolders.folders[newNodeLabel] = newFolder;
-  return new Props(existingFolders, parent);
+  updatedNode.folders[newNodeLabel] = newFolder;
+  return updatedNode;
 }
 
 export async function toTreeStructure(data) {

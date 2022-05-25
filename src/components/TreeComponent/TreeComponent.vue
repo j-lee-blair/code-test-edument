@@ -29,8 +29,8 @@ export default {
   methods: {
     handleAdd(updatedNode, inputIsValid, newNodeLabel) {
       if (inputIsValid) {
-        const { node, parent } = CreateFolder(updatedNode, newNodeLabel);
-        this.updateTree(node, parent);
+        const node = CreateFolder(updatedNode, newNodeLabel);
+        this.updateTree(node);
         this.forceRerender();
       } else {
         console.log("invalid input");
