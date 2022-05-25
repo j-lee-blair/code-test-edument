@@ -24,7 +24,7 @@
               <i
                 t-id="Folder-folder-add-confirm"
                 class="icon input-btn material-symbols-outlined"
-                @click="addSubfolder"
+                @click="handleAdd(node, inputIsValid, inputData, label)"
                 >add</i
               >
               <input
@@ -50,7 +50,8 @@
             :key="key"
             :node="folder"
             :label="key"
-            @update-topNode="updateTopNode"
+            :handle-add="handleAdd"
+            :parentNodeKey="parentLabel"
           />
         </div>
       </Transition>
@@ -60,7 +61,7 @@
 
 <script>
 import File from "../File.vue";
-import { CreateFolder } from "../../dataUtilities";
+// import { CreateFolder } from "../../dataUtilities";
 
 export default {
   name: "node",
@@ -70,6 +71,8 @@ export default {
       type: String,
       default: "Root",
     },
+    parentNodeKey: String,
+    handleAdd: Function,
   },
   data() {
     return {
@@ -82,6 +85,7 @@ export default {
   components: {
     File,
   },
+
   methods: {
     toggleParentActive() {
       this.parentActive = !this.parentActive;
@@ -89,23 +93,34 @@ export default {
     toggleInputField() {
       this.showInputField = !this.showInputField;
     },
-    addSubfolder() {
-      if (this.inputIsValid()) {
-        const updatedNode = CreateFolder(this.node, this.inputData, this.label);
-        console.log("updatedNode: ", updatedNode);
-        this.updateTopNode(updatedNode);
-        //this.inputError = false;
-        this.newEntry = "";
-      }
-    },
+    // addSubfolder() {
+    //   if (this.inputIsValid()) {
+    //     const updatedNode = CreateFolder(this.node, this.inputData);
+    //     console.log("updatedNode: ", updatedNode);
+    //     this.updateTopNode(updatedNode);
+    //     //this.inputError = false;
+    //     this.newEntry = "";
+    //   }
+    // },
+    // inputIsValid() {
+    //   this.inputError =
+    //     Object.keys(this.node.folders).indexOf(this.inputData) === -1 &&
+    //     this.inputData !== "";
+    //   return this.inputError;
+    // },
+    // updateTopNode(props) {
+    //   this.$emit("update-tree", props);
+    // },
+  },
+  computed: {
     inputIsValid() {
-      this.inputError =
+      return (
         Object.keys(this.node.folders).indexOf(this.inputData) === -1 &&
-        this.inputData !== "";
-      return this.inputError;
+        this.inputData !== ""
+      );
     },
-    updateTopNode(props) {
-      this.$emit("update-tree", props);
+    parentLabel() {
+      return this.label ? this.label : "Root";
     },
   },
 };

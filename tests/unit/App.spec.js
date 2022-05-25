@@ -6,6 +6,7 @@ import {
   UserInput,
   simulateClickConfirmNewFolderButtonWithValue,
   findAllElementsAndClickFirst,
+  findAllElementsAndClickSecond,
 } from "./helpers";
 
 const FILE_C_LIST = "character_list.txt";
@@ -98,7 +99,7 @@ test("when input has two folders one file each, render tree structure with two s
   expect(treeFolderTitle.at(2).html()).toContain("baz");
 });
 
-it("when root has one folder click add folder enter value and confirm, should render subfolder with correct label", async () => {
+test("when root has one folder click add folder enter value and confirm, should render subfolder with correct label", async () => {
   const wrapper = mount(App);
 
   await simulateClickJsonInputOkWithValue(
@@ -107,6 +108,26 @@ it("when root has one folder click add folder enter value and confirm, should re
     Selectors.InputFormInputField
   );
   await findAllElementsAndClickFirst(wrapper, Selectors.FolderComponentAdd);
+  await simulateClickConfirmNewFolderButtonWithValue(
+    wrapper,
+    validInput,
+    Selectors.FolderComponentNewFolderInput
+  );
+  const folders = wrapper.findAll(Selectors.FolderComponentFolder);
+
+  expect(folders.length).toBe(3);
+  expect(folders.at(2).html()).toContain(validInput);
+});
+
+test("when root has one folder click add to subfolder enter value and confirm, should render nested subfolder with correct label", async () => {
+  const wrapper = mount(App);
+
+  await simulateClickJsonInputOkWithValue(
+    wrapper,
+    UserInput.OneFolderOneFile,
+    Selectors.InputFormInputField
+  );
+  await findAllElementsAndClickSecond(wrapper, Selectors.FolderComponentAdd);
   await simulateClickConfirmNewFolderButtonWithValue(
     wrapper,
     validInput,

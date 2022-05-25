@@ -36,6 +36,12 @@ export async function findAllElementsAndClickFirst(wrapper, selector) {
   return element;
 }
 
+export async function findAllElementsAndClickSecond(wrapper, selector) {
+  const element = await wrapper.findAll(selector).at(1);
+  element.trigger("click");
+  return element;
+}
+
 export function mountWithProps(Component, options = {}) {
   return mount(Component, {
     propsData: options,
