@@ -12,6 +12,13 @@ export function CreateFolder(currentFolder, newNodeLabel) {
   return updatedNode;
 }
 
+export function PushFile(currentFolder, newFile) {
+  let updatedNode = { ...currentFolder };
+  updatedNode.files.push(newFile);
+  updatedNode.files.sort();
+  return updatedNode;
+}
+
 export async function toTreeStructure(data) {
   let paths = data.map((x) => x.split("/"));
 

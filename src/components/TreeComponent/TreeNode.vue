@@ -13,51 +13,40 @@
       <i
         v-if="parentActive && !showInputField"
         t-id="Folder-folder-add"
-        class="icon button button-add material-symbols-outlined"
+        class="icon button-add material-symbols-outlined"
         @click="toggleInputField"
         >add</i
       >
+
       <Transition>
         <div v-if="parentActive">
           <div v-if="showInputField">
-            <div class="input-icon">
-              <i
-                t-id="Folder-folder-add-confirm"
-                class="icon input-btn confirm material-symbols-outlined"
-                @click="handleAdd(node, inputIsValid, inputData)"
-                >add</i
-              >
-              <i
-                class="icon input-btn close material-symbols-outlined"
-                @click="toggleInputField"
-                >close</i
-              >
-              <input
-                t-id="Folder-new-folder-input"
-                class="new-folder"
-                ref="addFolder"
-                type="text"
-                placeholder="Enter new folder"
-                maxlength="30"
-                v-model="inputData"
-              />
-
-              <ErrorMsg
-                t-id="TreeNode-error-duplicate-folder"
-                message="Duplicate folder"
-                :show="!inputIsValid && inputError"
-                :centered="false"
-                class="errMsg"
-                marginSmall
-              />
-            </div>
+            <InputFieldInnerButton
+              @confirm="updateFolders"
+              @toggleInput="toggleInputField"
+              :placeholder="'Enter new folder'"
+              :inputIsValid="inputIsValid"
+              type="folder"
+            />
+            <ErrorMsg
+              t-id="TreeNode-error-duplicate-folder"
+              :message="'field cannot be empty or contain duplicate'"
+              :show="!inputIsValid && inputError"
+              :centered="false"
+              class="errMsg"
+              marginSmall
+            />
           </div>
-          <div v-if="node.files">
-            <File
-              v-for="file in node.files"
-              :key="file"
-              :fileName="file"
-            ></File>
+          <div v-if="node.files" class="file-list">
+            <File v-for="file in node.files" :key="file" :fileName="file" />
+            <InputFieldInnerButton
+              @confirm="updateFiles"
+              @toggleInput="toggleInputField"
+              :placeholder="'Enter new file'"
+              :inputIsValid="inputIsValid"
+              :closeButton="false"
+              type="file"
+            />
           </div>
           <node
             v-for="(folder, key) of node.folders"
@@ -75,6 +64,7 @@
 <script>
 import File from "../File.vue";
 import ErrorMsg from "../ErrorMsg.vue";
+import InputFieldInnerButton from "../InputFieldInnerButton.vue";
 
 export default {
   name: "node",
@@ -85,88 +75,64 @@ export default {
       default: "Root",
     },
     handleAdd: Function,
+    handleAddFile: Function,
   },
   data() {
     return {
       parentActive: true,
       showInputField: false,
-      inputData: "",
+      newFolderLabel: "",
+      newFileLabel: "",
       inputError: false,
     };
-  },
-
-  updated() {
-    this.inputError = this.inputData !== "" && !this.inputIsValid;
-    if (this.showInputField) {
-      this.$refs.addFolder.focus();
-    }
   },
   components: {
     File,
     ErrorMsg,
+    InputFieldInnerButton,
   },
 
   methods: {
     toggleParentActive() {
       this.parentActive = !this.parentActive;
     },
-    toggleInputField() {
-      //this.inputData = "";
 
+    toggleInputField() {
       this.showInputField = !this.showInputField;
+      if (!this.showInputField) this.inputError = false;
+    },
+    updateFolders(newFolderLabel) {
+      this.newFolderLabel = newFolderLabel;
+      if (this.inputIsValid) {
+        this.handleAdd(this.node, this.newFolderLabel);
+      } else {
+        this.inputError = true;
+      }
+    },
+    updateFiles(fileName) {
+      console.log("updateFiles: ", fileName);
+      this.handleAddFile(this.node, fileName);
     },
   },
   computed: {
     inputIsValid() {
-      return (
-        Object.keys(this.node.folders).indexOf(this.inputData) === -1 &&
-        this.inputData !== ""
-      );
+      return Object.keys(this.node.folders).indexOf(this.newFolderLabel) === -1;
+    },
+    errorText() {
+      return this.inputIsValid ? "Duplicate folder" : "Empty field";
     },
   },
 };
 </script>
 
-<style scoped>
-.errMsg {
-  font-size: 0.75em;
-}
-
+<style>
 .icon {
   vertical-align: middle;
   font-size: 1.8rem;
 }
-
-.input-btn {
-  cursor: pointer;
-}
-
-.confirm {
-  margin-left: 13.3rem;
-  border: solid 0.5px black;
-  max-height: 1.7rem;
-  margin-top: 0.4rem;
-  border-radius: 0.4rem;
-  font-size: 1em;
-}
-
-.close {
-  cursor: pointer;
-  margin-left: 15.5rem;
-  margin-top: 0.2rem;
-}
-
-.input-icon i {
-  position: absolute;
-}
-
-.input-icon {
+.errMsg {
+  font-size: 0.75em;
   margin-left: 2rem;
-}
-
-.input-btn:hover {
-  background: var(--clr-secondary-100);
-  color: var(--clr-primary-400);
 }
 
 .new-folder {
@@ -180,6 +146,7 @@ export default {
 
 .button-add {
   margin-left: 0.5rem;
+  vertical-align: middle;
 }
 
 .arrow {
@@ -194,6 +161,7 @@ export default {
 .title {
   display: inline;
   margin-left: 0.5rem;
+  vertical-align: middle;
 }
 
 .v-enter-active,

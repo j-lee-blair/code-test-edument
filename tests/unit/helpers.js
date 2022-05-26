@@ -30,6 +30,21 @@ export async function setAddFolderInputAndClickOk(wrapper, element, value) {
   button.trigger("click");
 }
 
+export async function simulateClickConfirmNewFileButtonWithValue(
+  wrapper,
+  inputString,
+  selector
+) {
+  const element = await wrapper.find(selector);
+  await setAddFileInputAndClickOk(wrapper, element, inputString);
+}
+
+export async function setAddFileInputAndClickOk(wrapper, element, value) {
+  element.setValue(value);
+  const button = await wrapper.find(Selectors.FileComponentAddConfirm);
+  button.trigger("click");
+}
+
 export async function findAllElementsAndClickFirst(wrapper, selector) {
   const element = await wrapper.findAll(selector);
   element.trigger("click");
@@ -57,9 +72,11 @@ export const Selectors = {
   FolderComponentFolder: '[t-id="Folder-folder"]',
   FolderComponentFolderTitle: '[t-id="Folder-folder-title"]',
   FolderComponentAdd: '[t-id="Folder-folder-add"]',
-  FolderComponentAddConfirm: '[t-id="Folder-folder-add-confirm"]',
-  FolderComponentNewFolderInput: '[t-id="Folder-new-folder-input"]',
+  FolderComponentAddConfirm: '[t-id="InputField-inner-button-confirm-folder"]',
+  FolderComponentNewFolderInput: '[t-id="InputField-inner-button-folder"]',
   FileComponentFileName: '[t-id="File-file-name"]',
+  FileComponentNewFileInput: '[t-id="InputField-inner-button-file"]',
+  FileComponentAddConfirm: '[t-id="InputField-inner-button-confirm-file"]',
   ErrorMsgDuplicateFolder: '[t-id="TreeNode-error-duplicate-folder"]',
 };
 

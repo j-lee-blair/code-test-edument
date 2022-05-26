@@ -7,6 +7,7 @@ import {
   simulateClickConfirmNewFolderButtonWithValue,
   findAllElementsAndClickFirst,
   findAllElementsAndClickSecond,
+  simulateClickConfirmNewFileButtonWithValue,
 } from "./helpers";
 
 const FILE_C_LIST = "character_list.txt";
@@ -137,4 +138,25 @@ test("when root has one folder click add to subfolder enter value and confirm, s
 
   expect(folders.length).toBe(3);
   expect(folders.at(2).html()).toContain(validInput);
+});
+
+test("when root has one folder click add file to subfolder enter value and confirm, should render nested subfolder with new file", async () => {
+  const wrapper = mount(App);
+
+  await simulateClickJsonInputOkWithValue(
+    wrapper,
+    UserInput.OneFolderOneFile,
+    Selectors.InputFormInputField
+  );
+
+  await simulateClickConfirmNewFileButtonWithValue(
+    wrapper,
+    validInput,
+    Selectors.FileComponentNewFileInput
+  );
+
+  const files = wrapper.findAll(Selectors.FileComponentFileName);
+
+  expect(files.length).toBe(2);
+  expect(files.at(0).html()).toContain(validInput);
 });

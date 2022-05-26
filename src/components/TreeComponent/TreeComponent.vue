@@ -3,6 +3,7 @@
     <TreeNode
       :node="propsData"
       :handle-add="handleAdd"
+      :handle-add-file="handleAddFile"
       :key="renderKey"
     ></TreeNode>
   </div>
@@ -10,7 +11,7 @@
 
 <script>
 import TreeNode from "./TreeNode.vue";
-import { CreateFolder } from "../../dataUtilities";
+import { CreateFolder, PushFile } from "../../dataUtilities";
 export default {
   name: "TreeComponent",
   props: {
@@ -27,13 +28,18 @@ export default {
     TreeNode,
   },
   methods: {
-    handleAdd(updatedNode, inputIsValid, newNodeLabel) {
-      if (inputIsValid) {
-        const node = CreateFolder(updatedNode, newNodeLabel);
-        this.updateTree(node);
-        this.forceRerender();
-      }
+    handleAdd(updatedNode, newNodeLabel) {
+      const node = CreateFolder(updatedNode, newNodeLabel);
+      this.updateTree(node);
+      this.forceRerender();
     },
+
+    handleAddFile(updatedNode, newFile) {
+      const node = PushFile(updatedNode, newFile);
+      this.updateTree(node);
+      this.forceRerender();
+    },
+
     updateTree(updatedNode) {
       this.$emit("childCallback", updatedNode, this.$options.name);
     },

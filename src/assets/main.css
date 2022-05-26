@@ -55,6 +55,15 @@ input{
     border-radius: 0.5rem;
 }
 
+
+.file-list * > input {
+    background: var(--clr-secondary-100);
+}
+
+.file-list * > input:hover {
+    background: var(--clr-primary-400);
+}
+
 .input-field{
     min-width: 90%;
 }
