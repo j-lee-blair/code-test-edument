@@ -54,6 +54,7 @@
             :node="folder"
             :label="key"
             :handle-add="handleAdd"
+            :handle-add-file="handleAddFile"
           />
         </div>
       </Transition>
