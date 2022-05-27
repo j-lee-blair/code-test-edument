@@ -88,7 +88,7 @@ export default {
   position: absolute;
 }
 .input-icon {
-  margin-left: 2rem;
+  margin-left: 2.8rem;
   position: relative;
 }
 .input-btn:hover {

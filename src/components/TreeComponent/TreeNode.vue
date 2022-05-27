@@ -32,7 +32,7 @@
               :message="'field cannot be empty or contain duplicate'"
               :show="inputErrorFolder"
               :centered="false"
-              class="errMsg"
+              class="error-msg"
               marginSmall
             />
           </div>
@@ -50,7 +50,7 @@
               :message="'field cannot be empty or contain duplicate'"
               :show="inputErrorFile"
               :centered="false"
-              class="errMsg"
+              class="error-msg"
               marginSmall
             />
           </div>
@@ -151,9 +151,9 @@ export default {
   vertical-align: middle;
   font-size: 1.8rem;
 }
-.errMsg {
+.error-msg {
   font-size: 0.75em;
-  margin-left: 2rem;
+  margin-left: 2.8rem;
 }
 
 .folder > span {
