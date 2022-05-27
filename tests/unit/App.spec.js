@@ -8,6 +8,7 @@ import {
   findAllElementsAndClickFirst,
   findAllElementsAndClickSecond,
   simulateClickConfirmNewFileButtonWithValue,
+  findAllElementsAndClickThird,
 } from "./helpers";
 
 const FILE_C_LIST = "character_list.txt";
@@ -53,7 +54,11 @@ test("when input has one folder one file, render tree structure with one subfold
     Selectors.InputFormInputField
   );
 
-  const treeFolder = wrapper.find(Selectors.FolderComponentFolder);
+  const treeFolder = await findAllElementsAndClickSecond(
+    wrapper,
+    Selectors.FolderComponentFolder
+  );
+  // const treeFolder = wrapper.find(Selectors.FolderComponentFolder);
   const treeFolderTitle = wrapper.findAll(Selectors.FolderComponentFolderTitle);
   const fileName = wrapper.find(Selectors.FileComponentFileName);
 
@@ -69,6 +74,8 @@ test("when input has one folder two files, render tree structure with one subfol
     UserInput.OneFoldersTwoFiles,
     Selectors.InputFormInputField
   );
+
+  await findAllElementsAndClickSecond(wrapper, Selectors.FolderComponentFolder);
 
   const fileItems = wrapper.findAll(Selectors.FileComponentFileName);
   const treeFolders = wrapper.findAll(Selectors.FolderComponentFolder);
@@ -88,6 +95,8 @@ test("when input has two folders one file each, render tree structure with two s
     Selectors.InputFormInputField
   );
 
+  await findAllElementsAndClickSecond(wrapper, Selectors.FolderComponentFolder);
+  await findAllElementsAndClickThird(wrapper, Selectors.FolderComponentFolder);
   const fileItems = wrapper.findAll(Selectors.FileComponentFileName);
   const treeFolders = wrapper.findAll(Selectors.FolderComponentFolder);
   const treeFolderTitle = wrapper.findAll(Selectors.FolderComponentFolderTitle);
@@ -128,12 +137,14 @@ test("when root has one folder click add to subfolder enter value and confirm, s
     UserInput.OneFolderOneFile,
     Selectors.InputFormInputField
   );
+  await findAllElementsAndClickSecond(wrapper, Selectors.FolderComponentFolder);
   await findAllElementsAndClickSecond(wrapper, Selectors.FolderComponentAdd);
   await simulateClickConfirmNewFolderButtonWithValue(
     wrapper,
     validInput,
     Selectors.FolderComponentNewFolderInput
   );
+  await findAllElementsAndClickSecond(wrapper, Selectors.FolderComponentFolder);
   const folders = wrapper.findAll(Selectors.FolderComponentFolder);
 
   expect(folders.length).toBe(3);
@@ -149,12 +160,14 @@ test("when root has one folder click add file to subfolder enter value and confi
     Selectors.InputFormInputField
   );
 
+  await findAllElementsAndClickSecond(wrapper, Selectors.FolderComponentFolder);
+
   await simulateClickConfirmNewFileButtonWithValue(
     wrapper,
     validInput,
     Selectors.FileComponentNewFileInput
   );
-
+  await findAllElementsAndClickSecond(wrapper, Selectors.FolderComponentFolder);
   const files = wrapper.findAll(Selectors.FileComponentFileName);
 
   expect(files.length).toBe(2);

@@ -86,7 +86,7 @@ export default {
   },
   data() {
     return {
-      parentActive: true,
+      parentActive: false,
       showInputField: false,
       inputErrorFolder: false,
       inputErrorFile: false,
@@ -98,9 +98,8 @@ export default {
     InputFieldInnerButton,
   },
 
-  //TODO: root node always active
   mounted() {
-    //if (this.label === "Root") this.parentActive = true;
+    if (this.label === "Root") this.parentActive = true;
   },
 
   methods: {
