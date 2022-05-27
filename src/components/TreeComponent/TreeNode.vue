@@ -25,13 +25,12 @@
               @confirm="updateFolders"
               @toggleInput="toggleInputField"
               :placeholder="'Enter new folder'"
-              :inputIsValid="inputIsValid"
               type="folder"
             />
             <ErrorMsg
               t-id="TreeNode-error-duplicate-folder"
               :message="'field cannot be empty or contain duplicate'"
-              :show="!inputIsValid && inputError"
+              :show="inputErrorFolder"
               :centered="false"
               class="errMsg"
               marginSmall
@@ -43,9 +42,16 @@
               @confirm="updateFiles"
               @toggleInput="toggleInputField"
               :placeholder="'Enter new file'"
-              :inputIsValid="inputIsValid"
               :closeButton="false"
               type="file"
+            />
+            <ErrorMsg
+              t-id="TreeNode-error-duplicate-file"
+              :message="'field cannot be empty or contain duplicate'"
+              :show="inputErrorFile"
+              :centered="false"
+              class="errMsg"
+              marginSmall
             />
           </div>
           <node
@@ -82,15 +88,19 @@ export default {
     return {
       parentActive: true,
       showInputField: false,
-      newFolderLabel: "",
-      newFileLabel: "",
-      inputError: false,
+      inputErrorFolder: false,
+      inputErrorFile: false,
     };
   },
   components: {
     File,
     ErrorMsg,
     InputFieldInnerButton,
+  },
+
+  //TODO: root node always active
+  mounted() {
+    //if (this.label === "Root") this.parentActive = true;
   },
 
   methods: {
@@ -103,22 +113,33 @@ export default {
       if (!this.showInputField) this.inputError = false;
     },
     updateFolders(newFolderLabel) {
-      this.newFolderLabel = newFolderLabel;
-      if (this.inputIsValid) {
-        this.handleAdd(this.node, this.newFolderLabel);
+      if (this.inputIsValid(newFolderLabel, "FOLDER")) {
+        this.handleAdd(this.node, newFolderLabel);
       } else {
-        this.inputError = true;
+        this.inputErrorFolder = true;
       }
     },
     updateFiles(fileName) {
-      console.log("updateFiles: ", fileName);
-      this.handleAddFile(this.node, fileName);
+      if (this.inputIsValid(fileName, "FILE")) {
+        this.handleAddFile(this.node, fileName);
+      } else {
+        this.inputErrorFile = true;
+      }
+    },
+    inputIsValid(data, type) {
+      switch (type) {
+        case "FOLDER":
+          return (
+            Object.keys(this.node.folders).indexOf(data) === -1 && data !== ""
+          );
+        case "FILE":
+          return this.node.files.indexOf(data) === -1 && data !== "";
+        default:
+          return false;
+      }
     },
   },
   computed: {
-    inputIsValid() {
-      return Object.keys(this.node.folders).indexOf(this.newFolderLabel) === -1;
-    },
     errorText() {
       return this.inputIsValid ? "Duplicate folder" : "Empty field";
     },
@@ -126,7 +147,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .icon {
   vertical-align: middle;
   font-size: 1.8rem;
@@ -136,9 +157,8 @@ export default {
   margin-left: 2rem;
 }
 
-.new-folder {
-  vertical-align: middle;
-  min-width: 15rem;
+.folder > span {
+  cursor: pointer;
 }
 
 .folder {
@@ -148,6 +168,10 @@ export default {
 .button-add {
   margin-left: 0.5rem;
   vertical-align: middle;
+  cursor: pointer;
+}
+.button-add:hover {
+  color: var(--clr-primary-400);
 }
 
 .arrow {

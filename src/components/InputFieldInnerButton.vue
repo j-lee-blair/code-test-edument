@@ -14,7 +14,7 @@
     >
     <input
       :t-id="`InputField-inner-button-${type}`"
-      class="new-folder"
+      class="new-item"
       ref="addItem"
       type="text"
       :placeholder="placeholder"
@@ -65,6 +65,12 @@ export default {
   vertical-align: text-bottom;
   cursor: pointer;
 }
+
+.new-item {
+  vertical-align: middle;
+  min-width: 15rem;
+}
+
 .confirm {
   margin-left: 13.3rem;
   border: solid 0.5px black;

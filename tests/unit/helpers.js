@@ -35,7 +35,7 @@ export async function simulateClickConfirmNewFileButtonWithValue(
   inputString,
   selector
 ) {
-  const element = await wrapper.find(selector);
+  const element = await wrapper.findAll(selector).at(0);
   await setAddFileInputAndClickOk(wrapper, element, inputString);
 }
 
@@ -68,16 +68,21 @@ export const Selectors = {
   InputFormInputField: '[t-id="InputForm-input-field"]',
   InputFormbutton: '[t-id="InputForm-button"]',
   InputFormError: '[t-id="InputForm-json-error"]',
+
   TreeComponent: '[t-id="TreeComponent"]',
+
   FolderComponentFolder: '[t-id="Folder-folder"]',
   FolderComponentFolderTitle: '[t-id="Folder-folder-title"]',
   FolderComponentAdd: '[t-id="Folder-folder-add"]',
   FolderComponentAddConfirm: '[t-id="InputField-inner-button-confirm-folder"]',
   FolderComponentNewFolderInput: '[t-id="InputField-inner-button-folder"]',
+
   FileComponentFileName: '[t-id="File-file-name"]',
   FileComponentNewFileInput: '[t-id="InputField-inner-button-file"]',
   FileComponentAddConfirm: '[t-id="InputField-inner-button-confirm-file"]',
+
   ErrorMsgDuplicateFolder: '[t-id="TreeNode-error-duplicate-folder"]',
+  ErrorMsgDuplicateFile: '[t-id="TreeNode-error-duplicate-file"]',
 };
 
 export const UserInput = {

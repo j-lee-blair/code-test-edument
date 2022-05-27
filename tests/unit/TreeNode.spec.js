@@ -4,10 +4,14 @@ import {
   findAllElementsAndClickFirst,
   Selectors,
   simulateClickConfirmNewFolderButtonWithValue,
+  findAllElementsAndClickSecond,
+  setAddFileInputAndClickOk,
 } from "./helpers";
 
-describe("TreeComponent.vue", () => {
-  const treeData = {
+let treeData = {};
+
+beforeEach(() => {
+  treeData = {
     propsData: {
       folders: {
         dc: {
@@ -18,9 +22,13 @@ describe("TreeComponent.vue", () => {
       files: [],
     },
   };
+});
 
+describe("TreeComponent.vue", () => {
   const validInput = "NEW_INPUT";
-  const DUPLICATE_ENTRY = "dc";
+  const DUPLICATE_FOLDER = "dc";
+  const DUPLICATE_FILE = "character_list.txt";
+
   const EMITTED = {
     files: [],
     folders: {
@@ -60,7 +68,7 @@ describe("TreeComponent.vue", () => {
     await findAllElementsAndClickFirst(wrapper, Selectors.FolderComponentAdd);
     await simulateClickConfirmNewFolderButtonWithValue(
       wrapper,
-      DUPLICATE_ENTRY,
+      DUPLICATE_FOLDER,
       Selectors.FolderComponentNewFolderInput
     );
 
@@ -70,5 +78,19 @@ describe("TreeComponent.vue", () => {
 
     expect(wrapper.emitted().childCallback).toBeFalsy();
     expect(errorMsgDuplicateFolder.exists()).toBeTruthy();
+  });
+  it("when click add file and enter invalid folder name, should not emit file show Error", async () => {
+    const wrapper = mountWithProps(TreeComponent, treeData);
+
+    const newFileInput = await findAllElementsAndClickSecond(
+      wrapper,
+      Selectors.FileComponentNewFileInput
+    );
+    await setAddFileInputAndClickOk(wrapper, newFileInput, DUPLICATE_FILE);
+
+    const errorMsgDuplicateFile = wrapper.find(Selectors.ErrorMsgDuplicateFile);
+
+    expect(wrapper.emitted().childCallback).toBeFalsy();
+    expect(errorMsgDuplicateFile.exists()).toBeTruthy();
   });
 });

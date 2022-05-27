@@ -37,8 +37,7 @@ export default {
 };
 </script>
 
-<style>
-@import "../assets/main.css";
+<style scoped>
 .error-wrapper {
   font-size: 0.75em;
   margin: 1rem 0;
