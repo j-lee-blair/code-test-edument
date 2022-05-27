@@ -79,6 +79,7 @@ input{
     width: min(90%, 70.5rem);
     background: var(--clr-secondary-100);
     min-height: 100vh;
+    overflow: auto;
 }
 
 .split{

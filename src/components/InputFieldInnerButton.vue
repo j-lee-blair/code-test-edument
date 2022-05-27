@@ -89,6 +89,7 @@ export default {
 }
 .input-icon {
   margin-left: 2rem;
+  position: relative;
 }
 .input-btn:hover {
   background: var(--clr-secondary-100);
