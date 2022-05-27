@@ -10,8 +10,8 @@ test("when input is not array, show error msg", async () => {
   const inputField = wrapper.find(Selectors.InputFormInputField);
 
   await setInputAndClickOk(wrapper, inputField, invalidInput);
-
   const errorMsg = wrapper.find(Selectors.InputFormError);
+
   expect(errorMsg.exists()).toBeTruthy();
   expect(wrapper.emitted().childCallback).toBeFalsy();
 });
@@ -21,8 +21,8 @@ test("when array is valid, do not show error msg", async () => {
   const inputField = wrapper.find(Selectors.InputFormInputField);
 
   await setInputAndClickOk(wrapper, inputField, VALID_INPUT);
-
   const errorMsg = wrapper.find(Selectors.InputFormError);
+
   expect(errorMsg.exists()).toBe(false);
 });
 

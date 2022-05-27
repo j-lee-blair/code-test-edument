@@ -45,20 +45,8 @@ export async function setAddFileInputAndClickOk(wrapper, element, value) {
   button.trigger("click");
 }
 
-export async function findAllElementsAndClickFirst(wrapper, selector) {
-  const element = await wrapper.findAll(selector).at(0);
-  element.trigger("click");
-  return element;
-}
-
-export async function findAllElementsAndClickSecond(wrapper, selector) {
-  const element = await wrapper.findAll(selector).at(1);
-  element.trigger("click");
-  return element;
-}
-
-export async function findAllElementsAndClickThird(wrapper, selector) {
-  const element = await wrapper.findAll(selector).at(2);
+export async function findElementAndClickWithIndex(wrapper, selector, index) {
+  const element = await wrapper.findAll(selector).at(index);
   element.trigger("click");
   return element;
 }

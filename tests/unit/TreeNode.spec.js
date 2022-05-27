@@ -1,10 +1,9 @@
 import TreeComponent from "../../src/components/TreeComponent/TreeComponent";
 import {
   mountWithProps,
-  findAllElementsAndClickFirst,
+  findElementAndClickWithIndex,
   Selectors,
   simulateClickConfirmNewFolderButtonWithValue,
-  findAllElementsAndClickSecond,
   setAddFileInputAndClickOk,
 } from "./helpers";
 
@@ -40,9 +39,10 @@ describe("TreeComponent.vue", () => {
   it("when click root folder, should collapse subfolders", async () => {
     const wrapper = mountWithProps(TreeComponent, treeData);
 
-    await findAllElementsAndClickFirst(
+    await findElementAndClickWithIndex(
       wrapper,
-      Selectors.FolderComponentFolder
+      Selectors.FolderComponentFolder,
+      0
     );
     const folders = wrapper.findAll(Selectors.FolderComponentFolder);
 
@@ -52,7 +52,11 @@ describe("TreeComponent.vue", () => {
   it("when click add folder and enter valid folder name, should emit folder to be added", async () => {
     const wrapper = await mountWithProps(TreeComponent, treeData);
 
-    await findAllElementsAndClickFirst(wrapper, Selectors.FolderComponentAdd);
+    await findElementAndClickWithIndex(
+      wrapper,
+      Selectors.FolderComponentAdd,
+      0
+    );
     await simulateClickConfirmNewFolderButtonWithValue(
       wrapper,
       validInput,
@@ -65,13 +69,16 @@ describe("TreeComponent.vue", () => {
   it("when click add folder and enter invalid folder name, should not emit folder and show Error", async () => {
     const wrapper = await mountWithProps(TreeComponent, treeData);
 
-    await findAllElementsAndClickFirst(wrapper, Selectors.FolderComponentAdd);
+    await findElementAndClickWithIndex(
+      wrapper,
+      Selectors.FolderComponentAdd,
+      0
+    );
     await simulateClickConfirmNewFolderButtonWithValue(
       wrapper,
       DUPLICATE_FOLDER,
       Selectors.FolderComponentNewFolderInput
     );
-
     const errorMsgDuplicateFolder = wrapper.find(
       Selectors.ErrorMsgDuplicateFolder
     );
@@ -83,16 +90,17 @@ describe("TreeComponent.vue", () => {
   it("when click add file and enter invalid folder name, should not emit file show Error", async () => {
     const wrapper = await mountWithProps(TreeComponent, treeData);
 
-    await findAllElementsAndClickSecond(
+    await findElementAndClickWithIndex(
       wrapper,
-      Selectors.FolderComponentFolder
+      Selectors.FolderComponentFolder,
+      1
     );
-    const newFileInput = await findAllElementsAndClickSecond(
+    const newFileInput = await findElementAndClickWithIndex(
       wrapper,
-      Selectors.FileComponentNewFileInput
+      Selectors.FileComponentNewFileInput,
+      1
     );
     await setAddFileInputAndClickOk(wrapper, newFileInput, DUPLICATE_FILE);
-
     const errorMsgDuplicateFile = wrapper.find(Selectors.ErrorMsgDuplicateFile);
 
     expect(wrapper.emitted().childCallback).toBeFalsy();
