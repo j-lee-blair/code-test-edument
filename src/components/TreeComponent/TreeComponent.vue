@@ -4,6 +4,7 @@
       :node="propsData"
       :handle-add="handleAdd"
       :handle-add-file="handleAddFile"
+      :handle-delete-file="handleDeleteFile"
       :key="renderKey"
     ></TreeNode>
   </div>
@@ -11,7 +12,7 @@
 
 <script>
 import TreeNode from "./TreeNode.vue";
-import { CreateFolder, PushFile } from "../../dataUtilities";
+import { CreateFolder, PushFile, DeleteFile } from "../../dataUtilities";
 export default {
   name: "TreeComponent",
   props: {
@@ -36,6 +37,12 @@ export default {
 
     handleAddFile(updatedNode, newFile) {
       const node = PushFile(updatedNode, newFile);
+      this.updateTree(node);
+      this.forceRerender();
+    },
+
+    handleDeleteFile(updatedNode, toBeDeleted) {
+      const node = DeleteFile(updatedNode, toBeDeleted);
       this.updateTree(node);
       this.forceRerender();
     },

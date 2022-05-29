@@ -19,6 +19,14 @@ export function PushFile(currentFolder, newFile) {
   return updatedNode;
 }
 
+export function DeleteFile(currentFolder, toBeDeleted) {
+  const newFileList = currentFolder.files
+    .filter((file) => file !== toBeDeleted)
+    .sort();
+  currentFolder.files = newFileList;
+  return currentFolder;
+}
+
 export async function toTreeStructure(data) {
   let paths = data.map((x) => x.split("/"));
 

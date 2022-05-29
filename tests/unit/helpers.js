@@ -74,6 +74,7 @@ export const Selectors = {
   FileComponentFileName: '[t-id="File-file-name"]',
   FileComponentNewFileInput: '[t-id="InputField-inner-button-file"]',
   FileComponentAddConfirm: '[t-id="InputField-inner-button-confirm-file"]',
+  FileComponentRemoveFile: '[t-id="File-remove-file-button"]',
 
   ErrorMsgDuplicateFolder: '[t-id="TreeNode-error-duplicate-folder"]',
   ErrorMsgDuplicateFile: '[t-id="TreeNode-error-duplicate-file"]',

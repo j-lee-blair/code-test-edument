@@ -196,3 +196,29 @@ test("when root has one folder click add file to subfolder enter value and confi
   expect(files.length).toBe(2);
   expect(files.at(0).html()).toContain(validInput);
 });
+
+test("when root one file and click remove file, should render tree with no files", async () => {
+  const wrapper = mount(App);
+
+  await simulateClickJsonInputOkWithValue(
+    wrapper,
+    UserInput.OneFileOnly,
+    Selectors.InputFormInputField
+  );
+
+  await findElementAndClickWithIndex(
+    wrapper,
+    Selectors.FileComponentFileName,
+    0
+  );
+
+  await findElementAndClickWithIndex(
+    wrapper,
+    Selectors.FileComponentRemoveFile,
+    0
+  );
+
+  const files = wrapper.findAll(Selectors.FileComponentFileName);
+
+  expect(files.length).toBe(0);
+});

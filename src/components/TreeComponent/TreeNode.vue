@@ -37,7 +37,12 @@
             />
           </div>
           <div v-if="node.files" class="file-list">
-            <File v-for="file in node.files" :key="file" :fileName="file" />
+            <File
+              v-for="file in node.files"
+              :key="file"
+              :fileName="file"
+              :handleDelete="deleteFile"
+            />
             <InputFieldInnerButton
               @confirm="updateFiles"
               @toggleInput="toggleInputField"
@@ -61,6 +66,7 @@
             :label="key"
             :handle-add="handleAdd"
             :handle-add-file="handleAddFile"
+            :handle-delete-file="handleDeleteFile"
           />
         </div>
       </Transition>
@@ -83,6 +89,7 @@ export default {
     },
     handleAdd: Function,
     handleAddFile: Function,
+    handleDeleteFile: Function,
   },
   data() {
     return {
@@ -136,6 +143,9 @@ export default {
         default:
           return false;
       }
+    },
+    deleteFile(toBeDeleted) {
+      this.handleDeleteFile(this.node, toBeDeleted);
     },
   },
   computed: {

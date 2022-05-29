@@ -1,14 +1,17 @@
 <template>
   <div class="left-margin">
-    <i class="icon material-symbols-outlined">insert_drive_file</i>
-    <p t-id="File-file-name" class="title">
-      {{ fileName }}
-    </p>
+    <span class="file-row">
+      <i class="icon material-symbols-outlined">insert_drive_file</i>
+      <p t-id="File-file-name" class="title" @click="toggleDeleteButton">
+        {{ fileName }}
+      </p>
+    </span>
     <i
-      v-if="hover"
-      class="icon material-symbols-outlined addfile-btn"
-      @click="toggleInput"
-      >add</i
+      t-id="File-remove-file-button"
+      v-if="showDeleteButton"
+      class="icon material-symbols-outlined"
+      @click="handleDelete(fileName)"
+      >delete</i
     >
   </div>
 </template>
@@ -19,18 +22,24 @@ export default {
     fileName: {
       type: String,
     },
+    handleDelete: Function,
   },
 
   data() {
     return {
-      hover: false,
       showInputField: false,
+      showDeleteButton: false,
+      selectedFile: "",
     };
   },
   methods: {
     toggleInput() {
+      this.showDeleteButton;
       this.showInputField = !this.showInputField;
       this.$forceUpdate();
+    },
+    toggleDeleteButton() {
+      this.showDeleteButton = !this.showDeleteButton;
     },
   },
 };
@@ -40,6 +49,10 @@ export default {
 .icon {
   vertical-align: middle;
   font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.file-row {
   cursor: pointer;
 }
 
