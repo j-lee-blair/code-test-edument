@@ -9,7 +9,7 @@
     <i
       t-id="File-remove-file-button"
       v-if="showDeleteButton"
-      class="icon material-symbols-outlined"
+      class="icon icon-warning material-symbols-outlined"
       @click="handleDelete(fileName)"
       >delete</i
     >
@@ -46,18 +46,12 @@ export default {
 </script>
 
 <style scoped>
-.icon {
-  vertical-align: middle;
-  font-size: 1.8rem;
-  cursor: pointer;
+.icon-warning:hover {
+  color: var(--clr-warning-800);
 }
 
 .file-row {
   cursor: pointer;
-}
-
-.title {
-  display: inline;
 }
 
 .left-margin {

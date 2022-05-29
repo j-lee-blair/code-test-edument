@@ -1,6 +1,6 @@
 <template>
   <div t-id="InputForm" class="text-center">
-    <p>Enter your JSON string to see File Tree</p>
+    <p>Enter JSON string array</p>
     <div>
       <input
         t-id="InputForm-input-field"
@@ -16,7 +16,12 @@
         @click="validateJsonString"
       />
     </div>
-    <ErrorMsg t-id="InputForm-json-error" :show="jsonInvalid" centered />
+    <ErrorMsg
+      t-id="InputForm-json-error"
+      :show="jsonInvalid"
+      centered
+      :message="`Input must be string array ['string']`"
+    />
   </div>
 </template>
 

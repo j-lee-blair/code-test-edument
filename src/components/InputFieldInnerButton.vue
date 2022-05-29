@@ -56,10 +56,6 @@ export default {
 </script>
 
 <style scoped>
-.icon {
-  vertical-align: middle;
-  font-size: 1.8rem;
-}
 .input-btn {
   min-width: none;
   vertical-align: text-bottom;
@@ -93,6 +89,6 @@ export default {
 }
 .input-btn:hover {
   background: var(--clr-secondary-100);
-  color: var(--clr-primary-400);
+  color: var(--clr-accent-800);
 }
 </style>

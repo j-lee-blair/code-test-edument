@@ -157,10 +157,6 @@ export default {
 </script>
 
 <style scoped>
-.icon {
-  vertical-align: middle;
-  font-size: 1.8rem;
-}
 .error-msg {
   font-size: 0.75em;
   margin-left: 2.8rem;
@@ -180,7 +176,7 @@ export default {
   cursor: pointer;
 }
 .button-add:hover {
-  color: var(--clr-primary-400);
+  color: var(--clr-accent-800);
 }
 
 .arrow {
@@ -190,12 +186,6 @@ export default {
 
 .arrow.open {
   transform: rotate(90deg);
-}
-
-.title {
-  display: inline;
-  margin-left: 0.5rem;
-  vertical-align: middle;
 }
 
 .v-enter-active,

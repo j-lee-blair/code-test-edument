@@ -1,9 +1,17 @@
 <template>
   <div id="app" class="container">
     <section>
-      <header class="text-center">JSON Tree Viewer</header>
+      <header class="text-center">File Tree</header>
     </section>
     <section>
+      <span
+        v-if="activeView !== 'InputForm'"
+        @click="activeView = 'InputForm'"
+        class="back-btn"
+      >
+        <i class="material-symbols-outlined"> arrow_back_ios </i>
+        Back
+      </span>
       <keep-alive>
         <component
           :is="activeView"

@@ -1,10 +1,10 @@
 :root{
-    --clr-primary-400: #F0C62D;
+    --clr-primary-400: #75B3BD;
     --clr-secondary-100: #494B5A;
 
     --clr-accent-200: #08F7FE;
     --clr-accent-400: #09FBD3;
-    --clr-accent-800: #FE53BB;
+    --clr-accent-800: #F0C62D;
     
     --clr-warning-800: #dd1313;
     --clr-warning-300: #e75c5cf2;
@@ -47,9 +47,13 @@ section {
     padding: 3rem 0;
 }
 
+header{
+    font-size: 3rem;
+}
+
 
 input{
-    background:var(--clr-primary-400);
+    background:var(--clr-accent-800);
     border:  var(--clr-dark-800) 1px solid;
     min-height: 2rem;
     border-radius: 0.5rem;
@@ -61,7 +65,25 @@ input{
 }
 
 .file-list * > input:hover {
-    background: var(--clr-primary-400);
+    background: var(--clr-accent-800);
+}
+
+.back-btn{
+    margin-left: 1rem;
+    color: var(--clr-accent-200);
+    cursor: pointer;
+}
+
+.back-btn i {
+    vertical-align: sub;
+}
+
+.back-btn > i:hover {
+    color: var(--clr-accent-800)
+}
+
+.back-btn:hover{
+    color: var(--clr-accent-800)
 }
 
 .input-field{
@@ -72,6 +94,22 @@ input{
     min-width: 90%;
     cursor: pointer;
 }
+
+.icon {
+    vertical-align: middle;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.title {
+    display: inline;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+
+  .title:hover {
+    color: var(--clr-accent-800);
+  }
 
 /* helper classes */
 .container{
@@ -104,7 +142,7 @@ section * > p{
 }
 
 section > header {
-    color: var(--clr-accent-800);
+    color: var(--clr-accent-800)
 }
 
 
