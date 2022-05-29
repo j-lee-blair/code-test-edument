@@ -59,6 +59,7 @@
               marginSmall
             />
           </div>
+          <!-- recursive call to TreeNode passing the prop functions from TreeComponent -->
           <node
             v-for="(folder, key) of node.folders"
             :key="key"

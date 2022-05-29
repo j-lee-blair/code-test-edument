@@ -12,6 +12,10 @@
         <i class="material-symbols-outlined"> arrow_back_ios </i>
         Back
       </span>
+
+      <!-- this component retains the state of the active views -->
+      <!-- the "component" component is replaced according to the active view -->
+      <!-- the callback is passed down to child components to either trigger a view change, or update the state variable 'root' -->
       <keep-alive>
         <component
           :is="activeView"

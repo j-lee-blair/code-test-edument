@@ -1,4 +1,7 @@
 <template>
+  <!-- this component is basically a manager for various update methods  -->
+  <!-- it acts as a broker between the parent state 'root' and the various TreeNode component's recursive children  -->
+  <!-- I had some trouble getting the view to refresh even though the root node had changed state, but found a nifty method using a simple key counter (see 'renderKey')  -->
   <div t-id="TreeComponent">
     <TreeNode
       :node="propsData"
@@ -50,6 +53,7 @@ export default {
     updateTree(updatedNode) {
       this.$emit("childCallback", updatedNode, this.$options.name);
     },
+    // this is the nifty method I was takling about which increments a counter, which Vue then reacts to triggering a re-render
     forceRerender() {
       this.renderKey += 1;
     },
