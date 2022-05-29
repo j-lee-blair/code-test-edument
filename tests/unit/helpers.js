@@ -26,7 +26,7 @@ export async function simulateClickConfirmNewFolderButtonWithValue(
 
 export async function setAddFolderInputAndClickOk(wrapper, element, value) {
   element.setValue(value);
-  const button = await wrapper.find(Selectors.FolderComponentAddConfirm);
+  const button = await wrapper.find(Selectors.ConfirmAddFolder);
   button.trigger("click");
 }
 
@@ -41,7 +41,7 @@ export async function simulateClickConfirmNewFileButtonWithValue(
 
 export async function setAddFileInputAndClickOk(wrapper, element, value) {
   element.setValue(value);
-  const button = await wrapper.find(Selectors.FileComponentAddConfirm);
+  const button = await wrapper.find(Selectors.FileAddConfirm);
   button.trigger("click");
 }
 
@@ -65,16 +65,17 @@ export const Selectors = {
 
   TreeComponent: '[t-id="TreeComponent"]',
 
-  FolderComponentFolder: '[t-id="Folder-folder"]',
-  FolderComponentFolderTitle: '[t-id="Folder-folder-title"]',
-  FolderComponentAdd: '[t-id="Folder-folder-add"]',
-  FolderComponentAddConfirm: '[t-id="InputField-inner-button-confirm-folder"]',
-  FolderComponentNewFolderInput: '[t-id="InputField-inner-button-folder"]',
+  FolderFolder: '[t-id="Folder-folder"]',
+  FolderFolderTitle: '[t-id="Folder-folder-title"]',
+  FolderAdd: '[t-id="Folder-folder-add"]',
 
-  FileComponentFileName: '[t-id="File-file-name"]',
-  FileComponentNewFileInput: '[t-id="InputField-inner-button-file"]',
-  FileComponentAddConfirm: '[t-id="InputField-inner-button-confirm-file"]',
-  FileComponentRemoveFile: '[t-id="File-remove-file-button"]',
+  ConfirmAddFolder: '[t-id="InputField-inner-button-confirm-folder"]',
+  FolderNewFolderInput: '[t-id="InputField-inner-button-folder"]',
+
+  FileFileName: '[t-id="File-file-name"]',
+  FileNewFileInput: '[t-id="InputField-inner-button-file"]',
+  FileAddConfirm: '[t-id="InputField-inner-button-confirm-file"]',
+  FileRemoveFile: '[t-id="File-remove-file-button"]',
 
   ErrorMsgDuplicateFolder: '[t-id="TreeNode-error-duplicate-folder"]',
   ErrorMsgDuplicateFile: '[t-id="TreeNode-error-duplicate-file"]',

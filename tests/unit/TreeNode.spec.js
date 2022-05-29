@@ -39,12 +39,8 @@ describe("TreeComponent.vue", () => {
   it("when click root folder, should collapse subfolders", async () => {
     const wrapper = mountWithProps(TreeComponent, treeData);
 
-    await findElementAndClickWithIndex(
-      wrapper,
-      Selectors.FolderComponentFolder,
-      0
-    );
-    const folders = wrapper.findAll(Selectors.FolderComponentFolder);
+    await findElementAndClickWithIndex(wrapper, Selectors.FolderFolder, 0);
+    const folders = wrapper.findAll(Selectors.FolderFolder);
 
     expect(folders.length).toBe(1);
   });
@@ -52,15 +48,11 @@ describe("TreeComponent.vue", () => {
   it("when click add folder and enter valid folder name, should emit folder to be added", async () => {
     const wrapper = await mountWithProps(TreeComponent, treeData);
 
-    await findElementAndClickWithIndex(
-      wrapper,
-      Selectors.FolderComponentAdd,
-      0
-    );
+    await findElementAndClickWithIndex(wrapper, Selectors.FolderAdd, 0);
     await simulateClickConfirmNewFolderButtonWithValue(
       wrapper,
       validInput,
-      Selectors.FolderComponentNewFolderInput
+      Selectors.FolderNewFolderInput
     );
 
     expect(wrapper.emitted().childCallback[0][0]).toEqual(EMITTED);
@@ -69,15 +61,11 @@ describe("TreeComponent.vue", () => {
   it("when click add folder and enter invalid folder name, should not emit folder and show Error", async () => {
     const wrapper = await mountWithProps(TreeComponent, treeData);
 
-    await findElementAndClickWithIndex(
-      wrapper,
-      Selectors.FolderComponentAdd,
-      0
-    );
+    await findElementAndClickWithIndex(wrapper, Selectors.FolderAdd, 0);
     await simulateClickConfirmNewFolderButtonWithValue(
       wrapper,
       DUPLICATE_FOLDER,
-      Selectors.FolderComponentNewFolderInput
+      Selectors.FolderNewFolderInput
     );
     const errorMsgDuplicateFolder = wrapper.find(
       Selectors.ErrorMsgDuplicateFolder
@@ -90,14 +78,10 @@ describe("TreeComponent.vue", () => {
   it("when click add file and enter invalid folder name, should not emit file show Error", async () => {
     const wrapper = await mountWithProps(TreeComponent, treeData);
 
-    await findElementAndClickWithIndex(
-      wrapper,
-      Selectors.FolderComponentFolder,
-      1
-    );
+    await findElementAndClickWithIndex(wrapper, Selectors.FolderFolder, 1);
     const newFileInput = await findElementAndClickWithIndex(
       wrapper,
-      Selectors.FileComponentNewFileInput,
+      Selectors.FileNewFileInput,
       1
     );
     await setAddFileInputAndClickOk(wrapper, newFileInput, DUPLICATE_FILE);
